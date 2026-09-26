@@ -229,7 +229,7 @@
     nav.tabs{
       position:fixed; left:0; right:0; bottom:0; z-index:50;
       background:var(--carbon); margin:0; padding:6px 6px calc(6px + env(safe-area-inset-bottom));
-      display:grid; grid-template-columns:repeat(5,1fr); gap:2px;
+      display:grid; grid-template-columns:repeat(6,1fr); gap:2px;
       box-shadow:0 -6px 20px -12px rgba(0,0,0,.6);
     }
     nav.tabs button{
@@ -237,7 +237,7 @@
       font-size:10.5px; letter-spacing:.01em; position:relative;
     }
     nav.tabs button span.txt{display:block}
-    nav.tabs .badge{position:absolute; top:2px; right:14px; min-width:17px; height:17px; font-size:10px}
+    nav.tabs .badge{position:absolute; top:2px; right:8px; min-width:17px; height:17px; font-size:10px}
 
     /* Producto y ticket, uno debajo del otro */
     .split{grid-template-columns:1fr; gap:0}
@@ -248,14 +248,7 @@
     .cats button{padding:9px 15px; font-size:14px}
 
     /* Botón flotante con el total, para no perderlo de vista */
-    #colaImpr{
-    position:fixed; left:50%; transform:translateX(-50%); top:64px; z-index:60;
-    background:var(--brasa); color:#fff; border-radius:11px; padding:11px 15px;
-    display:none; align-items:center; gap:12px; font-weight:750; font-size:13.5px;
-    box-shadow:0 10px 26px -12px rgba(0,0,0,.6);
-  }
-  #colaImpr button{background:#fff;color:var(--brasa);border-radius:8px;padding:6px 11px;font-weight:800;font-size:12.5px}
-  #contadorMes{
+    #contadorMes{
     position:fixed; right:16px; bottom:16px; z-index:44; display:none;
     background:var(--carbon); color:#F2F2EC; border-radius:14px; padding:14px 16px;
     min-width:210px; box-shadow:0 12px 34px -14px rgba(0,0,0,.75);
@@ -270,14 +263,7 @@
   #contadorMes .pie{font-size:11px;color:#9BA096;margin-top:7px;line-height:1.4}
   #contadorMes .cerrar{position:absolute;top:6px;right:8px;color:#6E736C;font-size:15px;padding:2px 5px}
   @media (max-width:900px){
-    #colaImpr{
-    position:fixed; left:50%; transform:translateX(-50%); top:64px; z-index:60;
-    background:var(--brasa); color:#fff; border-radius:11px; padding:11px 15px;
-    display:none; align-items:center; gap:12px; font-weight:750; font-size:13.5px;
-    box-shadow:0 10px 26px -12px rgba(0,0,0,.6);
-  }
-  #colaImpr button{background:#fff;color:var(--brasa);border-radius:8px;padding:6px 11px;font-weight:800;font-size:12.5px}
-  #contadorMes{right:12px;left:12px;bottom:78px;min-width:0}
+    #contadorMes{right:12px;left:12px;bottom:78px;min-width:0}
     #contadorMes .cifra{font-size:24px}
   }
   .fab-ticket{
@@ -346,6 +332,41 @@
     #print img{display:block;width:100%;height:auto;image-rendering:pixelated}    #print .cupon{page-break-after:always}
     #print .cupon:last-child{page-break-after:auto}
   }
+
+  /* ---------- Pasaporte (fidelización) ---------- */
+  .pp{margin-top:2px;border:1px dashed var(--linea);border-radius:10px;padding:10px 11px;background:#fff}
+  .pp.pp-mute{color:var(--gris);font-size:12.5px;font-weight:600;background:transparent;line-height:1.4}
+  .pp-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:13.5px}
+  .pp-top span{font-family:var(--mono);font-size:12.5px;font-weight:800;color:var(--brasa)}
+  .sellos{display:flex;gap:5px;flex-wrap:wrap;margin:9px 0 7px}
+  .sellos i{width:26px;height:26px;border-radius:50%;border:1.5px dashed #C3C6BB;display:grid;place-items:center;font-style:normal;font-size:13px;line-height:1}
+  .sellos i.on{border:1.5px solid var(--brasa);background:#FBE7DC;transform:rotate(-10deg)}
+  .sellos i.meta{opacity:.45}
+  .sellos i.premio{border-color:var(--verde);background:#E3F0E1;transform:none}
+  .sellos i.cortesia{background:var(--ambar);border-color:var(--ambar);color:#fff;font-size:14px;transform:none}
+  .sellos i.hito{border-color:var(--brasa);opacity:1}
+  .pp-print{width:100%;margin-top:7px;border:1px solid var(--linea);border-radius:9px;padding:9px;font-weight:700;font-size:13px;color:var(--gris);background:#fff}
+  .pp-sub{font-size:12px;color:var(--gris);line-height:1.45}
+  .pp input{margin-top:7px}
+  .pp-canje{width:100%;margin-top:9px;background:var(--verde);color:#fff;font-weight:800;border-radius:9px;padding:11px;font-size:14px}
+  .barra{height:6px;background:var(--humo);border-radius:6px;overflow:hidden;margin-top:7px}
+  .barra i{display:block;height:100%;background:var(--brasa);border-radius:6px}
+  .cl-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+  .cl-bar input{flex:1;min-width:200px;border:1px solid var(--linea);background:var(--papel);border-radius:9px;padding:11px 12px;font-weight:600}
+  .cl-list{padding-top:4px;padding-bottom:4px}
+  .cl{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px dashed var(--linea)}
+  .cl:last-child{border-bottom:none}
+  .cl .info{flex:1;min-width:0}
+  .cl .nm{font-weight:750;display:flex;gap:8px;flex-wrap:wrap;align-items:baseline}
+  .cl .mt{font-size:12px;color:var(--gris);margin-top:2px;line-height:1.4}
+  .cl .barra{max-width:260px}
+  .cl .ac{display:flex;gap:6px;flex-shrink:0}
+  .cl .ac a,.cl .ac button{border:1px solid var(--linea);border-radius:8px;padding:9px 11px;font-weight:700;font-size:13px;background:#fff;text-decoration:none;color:inherit}
+  .cl .ac a{border-color:#25D366;color:#128C4B}
+  .tag-ok{color:var(--verde);font-weight:800;font-size:12px}
+  .tag-frio{color:var(--ambar);font-weight:800;font-size:12px}
+  @media (max-width:520px){ .cl{flex-direction:column;align-items:stretch;gap:8px} .cl .ac>*{flex:1;text-align:center}
+    .cl-bar input{flex-basis:100%} .cl-bar .btn{flex:1} }
 </style>
 
 <header>
@@ -357,6 +378,7 @@
     <button data-v="cocina">🔥 <span class="txt">Cocina</span> <span class="badge" id="bdg">0</span></button>
     <button data-v="caja">💵 <span class="txt">Caja</span></button>
     <button data-v="cuadre">📋 <span class="txt">Cuadre</span></button>
+    <button data-v="clientes">🎟️ <span class="txt">Clientes</span></button>
     <button data-v="menu">⚙️ <span class="txt">Menú</span></button>
   </nav>
   <button class="campana" id="btnNube" title="Sincronización">☁️</button>
@@ -405,6 +427,7 @@
 
   <section class="view" id="v-caja"></section>
   <section class="view" id="v-cuadre"></section>
+  <section class="view" id="v-clientes"></section>
   <section class="view" id="v-menu"></section>
 </main>
 
@@ -425,7 +448,6 @@
       padding:16px;border-radius:11px;margin-top:16px">Entrar</button>
   </div>
 </div>
-<div id="colaImpr"></div>
 <div id="contadorMes"></div>
 <button class="fab-ticket" id="fabTicket"><span class="n" id="fabN">0</span><span>Ver el pedido</span><span class="t" id="fabT">$0</span></button>
 <div class="modal" id="modal"><div class="modal-box" id="modalBox"></div></div>
@@ -445,8 +467,8 @@ const uid = () => Math.random().toString(36).slice(2,9);
 function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('on'); clearTimeout(t._x); t._x=setTimeout(()=>t.classList.remove('on'),2400); }
 
 /* ================= CARTA ALI ALI ================= */
-const SW = (n,d,m,xl)=>({id:uid(),cat:'Shawarmas',n,d,precios:{M:m,XL:xl},mods:['proteina','salsas','agregados']});
-const PR = (n,d,p)=>({id:uid(),cat:'Premium',n,d,precios:{XL:p},mods:['proteina','salsas','agregados'],salsasMax:2,salsasTxt:'Incluye 2 salsas'});
+const SW = (n,d,m,xl)=>({id:uid(),cat:'Shawarmas',n,d,precios:{M:m,XL:xl},mods:['proteina','salsas']});
+const PR = (n,d,p)=>({id:uid(),cat:'Premium',n,d,precios:{XL:p},mods:['proteina','salsas'],salsasMax:2,salsasTxt:'Incluye 2 salsas'});
 
 function menuAliAli(){ return [
   // --- Promociones (shawarmas a elección excepto Gyro y Agus) ---
@@ -484,8 +506,7 @@ function menuAliAli(){ return [
   PR('6. Habibi Crunch','proteína, papas hilo, lechuga, pepinillos, tocino, queso gouda',7800),
   PR('7. Ilfrit','proteína, papas fritas, tomate, ají verde, merkén, tocino, queso cheddar, queso gouda',8000),
   PR('8. Dubai Fusión','proteína, papas fritas, tocino, cebolla caramelizada, queso cheddar, champiñones',8000),
-  {id:uid(),cat:'Premium',n:'9. Arma tu Shawarma',d:'proteína + 5 ingredientes a elección',
-   precios:{XL:8500},mods:['proteina','salsas','arma'],salsasMax:2,salsasTxt:'Incluye 2 salsas',armaMax:5},
+  PR('9. Arma tu Shawarma','proteína + 5 ingredientes a elección',8500),
 
   // --- Papas fritas ---
   {id:uid(),cat:'Papas fritas',n:'Porción de papas fritas',precios:{'Chica':2000,'Mediana':2800,'Grande':3300},mods:['salsas'],salsasMax:1,salsasTxt:'incluye 1 salsa',
@@ -547,21 +568,6 @@ function menuCocina(){ return [
   {id:uid(),cat:'Extras',n:'Tocino extra',precios:{U:1000},mods:[]},
 ];}
 
-// Ingredientes del "Arma tu Shawarma": 5 a elección, algunos con recargo
-const ARMA_ING = [
-  {n:'Cebolla salteada'},{n:'Lechuga'},{n:'Tomate'},{n:'Pimentón'},{n:'Aceituna'},
-  {n:'Repollo morado'},{n:'Ají verde'},{n:'Merkén'},{n:'Papas hilo'},{n:'Poroto negro'},
-  {n:'Poroto verde'},{n:'Choclo'},{n:'Salsa americana'},{n:'Champiñón'},
-  {n:'Queso gouda'},{n:'Queso de cabra'},
-  {n:'Queso cheddar',p:500},{n:'Tocino',p:500},
-  {n:'Papas fritas en su interior',p:500},{n:'Cebolla caramelizada',p:500}
-];
-// Lo que se le puede agregar a cualquier shawarma (todos con precio)
-const AGREGADOS_ALI = [
-  {n:'Queso cheddar',p:500},{n:'Queso gouda',p:500},{n:'Queso de cabra',p:500},
-  {n:'Tocino',p:500},{n:'Papas fritas en su interior',p:500},
-  {n:'Cebolla caramelizada',p:500},{n:'Champiñón',p:500},{n:'Palta',p:1000}
-];
 const AGREGADOS_COCINA=[{n:'Salsa tasty extra',p:500},{n:'Queso extra',p:1000},
   {n:'Tocino extra',p:1000},{n:'Bebida en lata',p:1500},{n:'Papas fritas',p:1500}];
 const EXTRAS_COCINA=['Sin salsa','Salsa aparte','Carne 3/4','Bien cocida','Cortada por la mitad'];
@@ -600,8 +606,7 @@ function estadoInicial(){ return {
     aliali:{nombre:'Ali Ali Delivery',logo:LOGO_ALIALI,logoBN:LOGO_ALIALI_BN,dir:ORIGEN,origen:ORIGEN,
             transferencia:{titular:'Ximena Orellana', rut:'76621459-2', banco:'Banco Santander',
               tipo:'Cuenta corriente', cuenta:'000092180239', correo:'alialidelivery@gmail.com'},envio:2000,zonas:ZONAS.map(z=>({...z})),menu:menuAliAli(),recargoPremium:1000,
-            proteinas:PROTEINAS.map(x=>({...x})),salsas:[...SALSAS],bebidas:[...BEBIDAS],calientes:[...CALIENTES],
-            agregados:AGREGADOS_ALI.map(a=>({...a})),armaIng:ARMA_ING.map(a=>({...a})),extras:[...EXTRAS_ALI],num:0},
+            proteinas:PROTEINAS.map(x=>({...x})),salsas:[...SALSAS],bebidas:[...BEBIDAS],calientes:[...CALIENTES],extras:[...EXTRAS_ALI],num:0},
     cocina:{nombre:'Cocina Oculta',logo:LOGO_COCINA,logoBN:LOGO_COCINA_BN,dir:'',origen:'',envio:2000,zonas:ZONAS_COCINA.map(z=>({...z})),
             menu:menuCocina(),recargoPremium:0,modoDefecto:'delivery',soloDelivery:true,
             proteinas:[],salsas:[],bebidas:[...BEBIDAS],calientes:[...CALIENTES],agregados:AGREGADOS_COCINA.map(a=>({...a})),
@@ -613,8 +618,7 @@ function estadoInicial(){ return {
   // Medios que ya emiten boleta por su cuenta: no hay que emitirla desde acá.
   pagosConBoleta:['Débito Getnet','Crédito Getnet','Pedidos Ya','Uber Eats','Rappi'],
   cuadres:{},
-  margenGanancia:60,
-  impresoraRemota:true,   // las comandas van al equipo principal // % de ganancia; el 40% restante es la inversión (costo del producto)
+  margenGanancia:60, // % de ganancia; el 40% restante es la inversión (costo del producto)
   codigos:[{c:'MARTES DE BAJON',pct:15}],
   pagos:['Efectivo','Débito Getnet','Crédito Getnet','Transferencia','JUNAEB','Pedidos Ya','Uber Eats','Rappi'],
   impresora:{papel:58,modo:'imagen',escala:88,offsetPct:-2,alinear:'izq',ajusteV6:true,propina:10,auto:'ambas',fuentePx:36,fuentePxBoleta:24,margenDer:8,fuentePt:16,copiasComanda:1,copiasBoleta:1,avance:8,
@@ -626,7 +630,7 @@ let S = estadoInicial(), draft=null, catFiltro='Todo', sonido=true, busqueda='';
 let admin=false; // se pierde al cerrar la app: hay que volver a poner el PIN
 
 /* ================= persistencia ================= */
-const VERSION='85 · 26-09-2026';
+const VERSION='93 · 23-09-2026';
 const CLAVE='comandera:estado';
 let tGuardar=null, ultimoGuardado=null, fallosGuardado=0;
 // Se escribe SIEMPRE en los dos lados y al leer gana el más reciente:
@@ -672,7 +676,6 @@ async function cargar(){
         if(S.pin===undefined) S.pin='1234';
         if(S.claveEntrada===undefined) S.claveEntrada='';
         if(S.margenGanancia===undefined || S.margenGanancia===50) S.margenGanancia=60;
-        if(S.impresoraRemota===undefined) S.impresoraRemota=true;
         if(!S.tecafe){
           Object.values(S.locales).forEach(l=>{
             if(!l.calientes || !l.calientes.length) l.calientes=[...CALIENTES];
@@ -681,22 +684,6 @@ async function cargar(){
                 precios:{U:1000},mods:['calientes'],calientesMax:1});
           });
           S.tecafe=true;
-        }
-        if(!S.armaV1){
-          const a=S.locales.aliali;
-          if(a){
-            a.armaIng=ARMA_ING.map(x=>({...x}));
-            if(!a.agregados || !a.agregados.length) a.agregados=AGREGADOS_ALI.map(x=>({...x}));
-            if(a.menu){
-              a.menu.forEach(x=>{
-                if(['Shawarmas','Premium'].includes(x.cat) && !(x.mods||[]).includes('agregados'))
-                  x.mods=[...(x.mods||[]),'agregados'];
-              });
-              const arma=a.menu.find(x=>/arma tu shawarma/i.test(x.n));
-              if(arma){ if(!arma.mods.includes('arma')) arma.mods.push('arma'); arma.armaMax=5; }
-            }
-          }
-          S.armaV1=true;
         }
         if(!S.shayrd){
           const a=S.locales.aliali;
@@ -880,9 +867,12 @@ async function cargar(){
    Firestore guarda en el equipo, así que sigue funcionando sin internet
    y sube todo solo cuando vuelve la señal. */
 let db=null, nubeLista=false, desuscribir=null, aplicandoNube=false;
-let subidos={}, ultimaNube=null, errorNube='', configTs=0;
+let subidos={}, subidosCli={}, subidosCua={}, ultimaNube=null, errorNube='', configTs=0;
 
-function cfgNube(){ if(!S.nube) S.nube={apiKey:'',proyecto:'',tienda:'',activo:false}; return S.nube; }
+// Datos fijos de tu proyecto de Firebase: así cualquier dispositivo que abra esta
+// página (celular, PC nuevo, etc.) queda conectado solo, sin pasar por el asistente.
+const NUBE_FIJA={apiKey:'AIzaSyCYSxJo2QdG4ifGXBH4RQf3r9vFxFeVhyA', proyecto:'comanderia-888ef', tienda:'comanderialiali', activo:true};
+function cfgNube(){ if(!S.nube) S.nube={...NUBE_FIJA}; return S.nube; }
 function estadoNube(){
   const n=cfgNube();
   if(!n.activo) return 'Desactivada';
@@ -915,7 +905,6 @@ async function iniciarNube(){
     try{ await db.enablePersistence({synchronizeTabs:true}); }catch(e){}
     escucharNube();
     nubeLista=true; ultimaNube=Date.now();
-    setTimeout(escucharCola, 600);
     if($('#v-menu').classList.contains('on')) renderMenuAdmin();
   }catch(e){
     const c=e.code||'';
@@ -926,6 +915,12 @@ async function iniciarNube(){
   }
 }
 const refTienda = ()=> db.collection('comanderas').doc(cfgNube().tienda);
+// Si hay un campo con foco dentro de esa vista, el usuario está escribiendo ahí mismo:
+// no la redibujamos encima o le borramos lo que lleva tecleado.
+const escribiendoEn = sel => { const a=document.activeElement; return !!(a && a.closest && a.closest(sel)); };
+function refrescoSuave(campo, fn){
+  setTimeout(()=>{ if(document.activeElement!==campo) fn(); }, 0);
+}
 
 function escucharNube(){
   const desde=new Date(Date.now()-1000*60*60*24*45).toISOString().slice(0,10); // 45 días
@@ -948,9 +943,9 @@ function escucharNube(){
           if(mx>(S.locales[k].num||0)) S.locales[k].num=mx;
         });
         guardar();
-        if($('#v-cocina').classList.contains('on')) renderCocina();
-        if($('#v-caja').classList.contains('on')) renderCaja();
-        if($('#v-cuadre').classList.contains('on')) renderCuadre();
+        if($('#v-cocina').classList.contains('on') && !escribiendoEn('#v-cocina')) renderCocina();
+        if($('#v-caja').classList.contains('on') && !escribiendoEn('#v-caja')) renderCaja();
+        if($('#v-cuadre').classList.contains('on') && !escribiendoEn('#v-cuadre')) renderCuadre();
         pintarBadge();
         if(nuevos && !snap.metadata.hasPendingWrites) beep();
       }
@@ -964,17 +959,66 @@ function escucharNube(){
       configTs=d.ts||0;
       aplicandoNube=true;
       if(d.locales) S.locales=JSON.parse(d.locales);
-      if(d.cuadres) S.cuadres=JSON.parse(d.cuadres);
       if(d.impresora) S.impresora=Object.assign(S.impresora,JSON.parse(d.impresora));
       if(d.codigos) S.codigos=JSON.parse(d.codigos);
       if(d.pagos) S.pagos=JSON.parse(d.pagos);
+      if(d.fidel) S.fidel=JSON.parse(d.fidel);
       aplicandoNube=false;
       guardar();
       const act=document.querySelector('nav.tabs button.on');
-      if(act) ir(act.dataset.v);
+      if(act && !escribiendoEn('#v-'+act.dataset.v)) ir(act.dataset.v);
     }, err=>{ errorNube=err.code||String(err); });
 
-  desuscribir=()=>{ unPed(); unCfg(); };
+  const unCli = refTienda().collection('clientes')
+    .onSnapshot(snap=>{
+      aplicandoNube=true; let cambios=0;
+      snap.docChanges().forEach(ch=>{
+        if(ch.type==='removed') return;
+        const r=ch.doc.data(), tel=ch.doc.id, l=cli()[tel];
+        const m=unirCliente(l,r);
+        subidosCli[tel]=canon(r);
+        if(canon(l)!==canon(m)){ cli()[tel]=m; cambios++; }
+      });
+      aplicandoNube=false; ultimaNube=Date.now();
+      if(cambios){
+        guardar();
+        if($('#v-clientes').classList.contains('on') && !($$('#modal')||{}).classList?.contains('on') && !escribiendoEn('#v-clientes')) renderClientes();
+        pintarPasaporte();
+      }
+    }, err=>{ errorNube=err.code||String(err); });
+
+  const unCua = refTienda().collection('cuadres')
+    .onSnapshot(snap=>{
+      aplicandoNube=true; let cambios=0;
+      snap.docChanges().forEach(ch=>{
+        if(ch.type==='removed') return;
+        const d=ch.doc.data(), clave=ch.doc.id;
+        if(clave===claveCuadre(fechaVista()) && escribiendoEn('#v-cuadre')) return; // lo está editando ahora
+        if(canon(S.cuadres[clave])===canon(d)) return;
+        S.cuadres[clave]=d; subidosCua[clave]=canon(d); cambios++;
+      });
+      aplicandoNube=false; ultimaNube=Date.now();
+      if(cambios){
+        guardar();
+        if($('#v-cuadre').classList.contains('on') && !escribiendoEn('#v-cuadre')) renderCuadre();
+      }
+    }, err=>{ errorNube=err.code||String(err); });
+
+  desuscribir=()=>{ unPed(); unCfg(); unCli(); unCua(); };
+}
+// Sube SOLO el cuadre que se está mirando ahora, apenas cambia (sin esperar el ciclo general)
+let tCuaNube=null;
+function subirCuadreNube(clave){
+  if(!db || !nubeLista) return;
+  clearTimeout(tCuaNube);
+  tCuaNube=setTimeout(async()=>{
+    try{
+      const cu=S.cuadres[clave]; if(!cu) return;
+      const j=canon(cu); if(subidosCua[clave]===j) return;
+      await refTienda().collection('cuadres').doc(clave).set(JSON.parse(j));
+      subidosCua[clave]=j; ultimaNube=Date.now();
+    }catch(e){ errorNube=e.code||String(e.message||e); }
+  }, 350);
 }
 
 // Sube lo que cambió. Se llama después de cada guardado local.
@@ -994,6 +1038,22 @@ async function subirNube(){
     Object.keys(subidos).forEach(id=>{
       if(!vivos[id]){ lote.delete(col.doc(id)); delete subidos[id]; n++; }
     });
+    // Clientes del pasaporte: uno por documento, nunca se borran de la nube
+    const colCli=refTienda().collection('clientes');
+    Object.values(cli()).forEach(c=>{
+      if(!c || !c.tel || n>=450) return;
+      const j=canon(c);
+      if(subidosCli[c.tel]===j) return;
+      lote.set(colCli.doc(c.tel), JSON.parse(j)); subidosCli[c.tel]=j; n++;
+    });
+    // Cuadres (caja del día): un documento por fecha+local, para que dos equipos nunca se pisen entre sí
+    const colCua=refTienda().collection('cuadres');
+    Object.entries(S.cuadres||{}).forEach(([clave,cu])=>{
+      if(!cu || n>=450) return;
+      const j=canon(cu);
+      if(subidosCua[clave]===j) return;
+      lote.set(colCua.doc(clave), JSON.parse(j)); subidosCua[clave]=j; n++;
+    });
     if(n){ await lote.commit(); ultimaNube=Date.now(); }
   }catch(e){ errorNube=e.code||String(e.message||e); }
 }
@@ -1005,8 +1065,9 @@ function subirConfigNube(){
     try{
       configTs=Date.now();
       await refTienda().collection('config').doc('general').set({
-        ts:configTs, locales:JSON.stringify(S.locales), cuadres:JSON.stringify(S.cuadres||{}),
-        impresora:JSON.stringify(S.impresora), codigos:JSON.stringify(S.codigos), pagos:JSON.stringify(S.pagos)
+        ts:configTs, locales:JSON.stringify(S.locales),
+        impresora:JSON.stringify(S.impresora), codigos:JSON.stringify(S.codigos), pagos:JSON.stringify(S.pagos),
+        fidel:JSON.stringify(cfgFidel())
       });
       ultimaNube=Date.now();
     }catch(e){ errorNube=e.code||String(e.message||e); }
@@ -1506,8 +1567,6 @@ function abrirConfig(prod, item, onLinea, onCancelar){
   const eligeSalsa=(prod.elige||[]).find(e=>e.tipo==='salsa');
   const eligeBebida=(prod.elige||[]).find(e=>e.tipo==='bebida');
   const usaAgregados=(prod.mods||[]).includes('agregados') && (loc.agregados||[]).length;
-  const usaArma=(prod.mods||[]).includes('arma') && (loc.armaIng||[]).length;
-  const armaMax=prod.armaMax||5;
   const usaCalientes=(prod.mods||[]).includes('calientes') && (loc.calientes||[]).length;
   const maxCal = prod.calientesMax||1;
   // Ingredientes propios del producto, leídos de su descripción
@@ -1525,14 +1584,13 @@ function abrirConfig(prod, item, onLinea, onCancelar){
   const usaProt = (prod.mods||[]).includes('proteina');
 
   const cfg = item ? JSON.parse(JSON.stringify(item.cfg)) : {
-    tam: tams[0], agregados:{}, arma:[], calientes:[], prot: usaProt ? ((prod.protFiltro
+    tam: tams[0], agregados:{}, calientes:[], prot: usaProt ? ((prod.protFiltro
       ? loc.proteinas.filter(p=> prod.protFiltro.some(f=> p.n.toLowerCase().includes(f)))
       : loc.proteinas)[0]||loc.proteinas[0]||{}).n||'' : '', salsas:{}, bebidas:{}, swList:[], extras:[], nota:'', recargo:0
   };
   if(!cfg.bebidas) cfg.bebidas={};
   if(!cfg.agregados) cfg.agregados={};
   if(!cfg.calientes) cfg.calientes=[];
-  if(!cfg.arma) cfg.arma=[];
   if(Array.isArray(cfg.salsas)){ const o={}; cfg.salsas.forEach(s=>o[s]=(o[s]||0)+1); cfg.salsas=o; }
   if(!cfg.salsas) cfg.salsas={};
   const protDef = loc.proteinas.length ? loc.proteinas[0].n : '';
@@ -1557,7 +1615,7 @@ function abrirConfig(prod, item, onLinea, onCancelar){
   function precioUnit(){
     const base = prod.precios[cfg.tam] ?? Object.values(prod.precios)[0];
     const pr = usaProt ? precioProt(cfg.prot) : 0;
-    return base + pr + extraPremium() + extraProtSw() + extraAgregados() + extraArma() + (cfg.recargo||0);
+    return base + pr + extraPremium() + extraProtSw() + extraAgregados() + (cfg.recargo||0);
   }
   function nSw(){ return cfg.swList.length; }
   function cuentaSw(n){ return cfg.swList.filter(x=>x.n===n).length; }
@@ -1565,8 +1623,6 @@ function abrirConfig(prod, item, onLinea, onCancelar){
   function nBebidas(){ return Object.values(cfg.bebidas).reduce((a,b)=>a+b,0); }
   const precioAgregado = n => (loc.agregados||[]).find(a=>a.n===n)?.p || 0;
   function extraAgregados(){ return Object.entries(cfg.agregados).reduce((a,[n,q])=>a+precioAgregado(n)*q,0); }
-  function extraArma(){ return (cfg.arma||[]).reduce((a,n)=>{
-    const ing=(loc.armaIng||[]).find(x=>x.n===n); return a+(ing&&ing.p?ing.p:0); },0); }
 
   function pinta(){
     const faltaSw = eligeSw ? Math.max(0, eligeSw.n - nSw()) : 0;
@@ -1575,13 +1631,11 @@ function abrirConfig(prod, item, onLinea, onCancelar){
     const faltaSalsa = topeSalsa ? Math.max(0, topeSalsa - nSalsas()) : 0;
     const faltaBebida = eligeBebida ? Math.max(0, eligeBebida.n - nBebidas()) : 0;
     const faltaCal = usaCalientes ? Math.max(0, maxCal - cfg.calientes.length) : 0;
-    const faltaArma = usaArma ? Math.max(0, armaMax - cfg.arma.length) : 0;
-    const incompleto = faltaSw>0 || faltaSalsa>0 || faltaBebida>0 || faltaCal>0 || faltaArma>0;
+    const incompleto = faltaSw>0 || faltaSalsa>0 || faltaBebida>0 || faltaCal>0;
     const aviso = faltaSw>0 ? `Faltan ${faltaSw} shawarma(s) por elegir`
                 : faltaSalsa>0 ? `Faltan ${faltaSalsa} salsa(s) por elegir`
                 : faltaBebida>0 ? `Falta elegir ${faltaBebida} bebida(s)`
-                : faltaCal>0 ? '¿Té o café?'
-                : faltaArma>0 ? `Falta${faltaArma>1?'n':''} ${faltaArma} ingrediente(s)` : '';
+                : faltaCal>0 ? '¿Té o café?' : '';
     $('#modalBox').innerHTML = `
       <h4>${prod.n}</h4>
       <div class="sb">${prod.d||''}</div>
@@ -1610,11 +1664,6 @@ function abrirConfig(prod, item, onLinea, onCancelar){
 
       ${usaCalientes ? `<div class="g-t">¿Qué prefiere? <span>${cfg.calientes.length} de ${maxCal}</span></div>
         <div class="ops">${loc.calientes.map(c=>`<button class="${cfg.calientes.includes(c)?'on':''}" data-cal="${c}">${c}</button>`).join('')}</div>`:''}
-
-      ${usaArma ? `<div class="g-t">Elige tus ingredientes
-        <span>${cfg.arma.length} de ${armaMax}${extraArma()?` · +${CLP(extraArma())}`:''}</span></div>
-        <div class="ops">${loc.armaIng.map(ing=>`<button class="${cfg.arma.includes(ing.n)?'on':''}" data-arma="${ing.n}">
-          ${ing.n}${ing.p?` <span style="opacity:.7">+${CLP(ing.p)}</span>`:''}</button>`).join('')}</div>`:''}
 
       ${usaAgregados ? `<div class="g-t">Agregados${extraAgregados()?` <span>+${CLP(extraAgregados())}</span>`:''}</div>
         ${loc.agregados.map(a=>`<div class="cnt ${cfg.agregados[a.n]?'on':''}">
@@ -1689,14 +1738,6 @@ function abrirConfig(prod, item, onLinea, onCancelar){
       const e=b.dataset.ex;
       cfg.extras = cfg.extras.includes(e) ? cfg.extras.filter(x=>x!==e) : [...cfg.extras,e];
       guardarCampos(); pinta();
-    });
-    box.querySelectorAll('[data-arma]').forEach(b=> b.onclick=()=>{
-      guardarCampos();
-      const n=b.dataset.arma;
-      if(cfg.arma.includes(n)) cfg.arma=cfg.arma.filter(x=>x!==n);
-      else if(cfg.arma.length<armaMax) cfg.arma.push(n);
-      else return toast('Son '+armaMax+' ingredientes: saca uno primero');
-      pinta();
     });
     box.querySelectorAll('[data-cal]').forEach(b=> b.onclick=()=>{
       const c=b.dataset.cal;
@@ -1782,9 +1823,6 @@ function abrirConfig(prod, item, onLinea, onCancelar){
       if(sw && sw.d && sw.cat==='Premium') soloCocina.push(`${it.n}: ${sw.d.replace(/^proteína,\s*/i,'')}`);
     });
     if(Object.keys(cfg.salsas).length) det.push('Salsas: '+Object.entries(cfg.salsas).map(([s,q])=> q>1?`${q}× ${s}`:s).join(', '));
-    if(cfg.arma.length) det.push('Ingredientes: '+cfg.arma.map(n=>{
-      const ing=(loc.armaIng||[]).find(x=>x.n===n);
-      return n+(ing&&ing.p?` (+${CLP(ing.p)})`:''); }).join(', '));
     if(cfg.calientes.length) det.push(cfg.calientes.join(', '));
     if(Object.keys(cfg.agregados).length) det.push(...Object.entries(cfg.agregados).map(([n,q])=>
       `${q>1?q+'× ':''}${n} (+${CLP(precioAgregado(n)*q)})`));
@@ -1806,7 +1844,7 @@ function abrirConfig(prod, item, onLinea, onCancelar){
     // el maestro ya se sabe la carta normal.
     const base = prod.precios[cfg.tam] ?? Object.values(prod.precios)[0];
     const pr = usaProt ? precioProt(cfg.prot) : 0;
-    const linea = {k:item?item.k:uid(), pid:prod.id, n:nombre, p:base+pr+extraPremium()+extraProtSw()+extraAgregados()+extraArma()+(cfg.recargo||0),
+    const linea = {k:item?item.k:uid(), pid:prod.id, n:nombre, p:base+pr+extraPremium()+extraProtSw()+extraAgregados()+(cfg.recargo||0),
                    q:1, det, dcoc:soloCocina, nota:cfg.nota.trim(), cfg};
     linea.q = item ? item.q : (cfg.cant||1);
     if(onLinea){ cerrarModal(); onLinea(linea); return; }
@@ -1840,14 +1878,18 @@ function renderCampos(){
        ${L().origen?`<button id="f-maps" style="text-align:left;font-size:12.5px;color:var(--gris);font-weight:650;padding:2px 2px 0">📍 Ver distancia desde ${L().origen}</button>`:''}`;
   } else if(d.modo==='local'){
     h=`<input id="f-mesa" placeholder="Mesa o número de cliente" value="${d.mesa}">`;
+    if(fidelOn()) h+=`<input id="f-fono" placeholder="Teléfono para el pasaporte (opcional)" inputmode="tel" value="${d.fono}">`;
   } else {
     h=`<input id="f-cli" placeholder="Nombre de quien retira" value="${d.cliente}">
        <input id="f-fono" placeholder="Teléfono (opcional)" inputmode="tel" value="${d.fono}">`;
   }
   h+=`<select id="f-pago"><option value="">Método de pago (opcional)</option>${S.pagos.map(p=>`<option ${d.pago===p?'selected':''}>${p}</option>`).join('')}</select>`;
+  if(fidelOn()) h+=`<div id="pasaporte"></div>`;
   $('#campos').innerHTML=h;
   const bind=(sel,key)=>{const el=$(sel); if(el) el.oninput=e=>d[key]=e.target.value;};
   bind('#f-cli','cliente');bind('#f-fono','fono');bind('#f-dir','dir');bind('#f-mesa','mesa');
+  const ff=$$('#f-fono'); if(ff) ff.oninput=e=>{ d.fono=e.target.value; pintarPasaporte(); };
+  pintarPasaporte();
   const pg=$('#f-pago'); if(pg) pg.onchange=e=>d.pago=e.target.value;
   const zn=$('#f-zona'); if(zn) zn.onchange=e=>{ d.zona=+e.target.value; renderTicket(); };
   const mp=$('#f-maps'); if(mp) mp.onclick=()=>{
@@ -1875,12 +1917,12 @@ function renderTicket(){
       ${i.dcoc&&i.dcoc.length?`<div class="opts" style="opacity:.75">» ${i.dcoc.join(' · ')} <span style="font-size:10.5px">(solo cocina)</span></div>`:''}
       ${i.det.length?`<div class="opts">${i.det.join(' · ')}</div>`:''}
       ${i.nota?`<div class="opts">📝 ${i.nota}</div>`:''}
-      <div class="acc">
+      <div class="acc">${i.premio?`<button class="edit" data-m="x" data-k="${i.k}">Quitar premio</button>`:`
         <button data-m="-" data-k="${i.k}">−</button>
         <button data-m="+" data-k="${i.k}">+</button>
         <button class="edit" data-m="$" data-k="${i.k}">+ $</button>
         <button class="edit" data-m="e" data-k="${i.k}">Editar</button>
-        <button class="edit" data-m="x" data-k="${i.k}">Quitar</button>
+        <button class="edit" data-m="x" data-k="${i.k}">Quitar</button>`}
       </div>
     </div>`).join('') : `<div class="vacio">Toca un producto para empezar.</div>`;
 
@@ -1947,7 +1989,7 @@ function enviar(){
   S.pedidos.push({
     id:uid(),num:loc.num,local:S.local,fecha:hoy(),
     modo:d.modo,cliente:d.cliente.trim(),fono:d.fono.trim(),dir:d.dir.trim(),mesa:d.mesa.trim(),
-    items:d.items.map(i=>({n:i.n,q:i.q,p:i.p,det:i.det,dcoc:i.dcoc||[],nota:i.nota})),
+    items:d.items.map(i=>{ const x={n:i.n,q:i.q,p:i.p,det:i.det,dcoc:i.dcoc||[],nota:i.nota}; if(i.premio) x.premio=true; return x; }),
     subtotal:subtotal(),pct:d.pct,codigo:d.codigo,desc:descuento(),envio:envio(),
     zona:d.modo==='delivery'&&zonaActual()?zonaActual().n:'',total:total(),
     pago:d.pago||'',pagos:(d.pagos||[]).filter(x=>Number(x.monto)>0),propina:d.propina||0,
@@ -1956,7 +1998,9 @@ function enviar(){
   const recien = S.pedidos[S.pedidos.length-1];
   $('#ticket').classList.add('feeding');
   setTimeout(()=>$('#ticket').classList.remove('feeding'),560);
-  beep(); toast('Pedido N° '+String(loc.num).padStart(3,'0')+' enviado a cocina');
+  const pas = registrarPasaporte(recien, d.items);
+  beep(); toast('Pedido N° '+String(loc.num).padStart(3,'0')+' enviado a cocina'
+    + (pas ? (pas.porApp ? ' · pago por app: no suma sellos' : (pas.regalo?' · cliente nuevo, +1 de regalo':'')+(pas.sellos?` · +${pas.sellos} sello${pas.sellos>1?'s':''}`+(pas.saldo>=cfgFidel().meta?' · 🎁 premio listo':` (${pas.saldo}/${cfgFidel().meta})`):'')) : ''));
   nuevoDraft(); renderTicket(); pintarBadge(); guardarYa();
   if(S.impresora.auto && S.impresora.auto!=='no') setTimeout(()=>imprimir(recien, S.impresora.auto), 200);
 }
@@ -2193,78 +2237,6 @@ function cobrarPedido(p, alTerminar, textoOk){
   $('#modal').classList.add('on');
 }
 
-
-/* ================= IMPRESIÓN REMOTA =================
-   Un equipo se marca como "impresora principal". Los demás, en vez de
-   imprimir, dejan el trabajo en la nube y este lo imprime solo. */
-const CLAVE_IMPRESORA='comandera:esImpresora';
-const esImpresoraPrincipal = ()=>{ try{ return localStorage.getItem(CLAVE_IMPRESORA)==='1'; }catch(e){ return false; } };
-const marcarImpresora = v=>{ try{ v?localStorage.setItem(CLAVE_IMPRESORA,'1'):localStorage.removeItem(CLAVE_IMPRESORA); }catch(e){} };
-
-let desuscribirCola=null, imprimiendoCola=false, arranqueCola=0;
-const colaLocal=[];   // trabajos que llegaron y esperan que el navegador los deje imprimir
-
-// Deja el trabajo en la nube para que lo tome el equipo principal
-async function encolarImpresion(p, tipo){
-  if(!db || !nubeLista) return false;
-  try{
-    await refTienda().collection('impresion').add({
-      pedidoId:p.id, tipo, local:S.local,
-      num:p.num||0, ts:Date.now(), estado:'pendiente',
-      equipo:(navigator.userAgent||'').slice(0,60)
-    });
-    return true;
-  }catch(e){ return false; }
-}
-
-function escucharCola(){
-  if(desuscribirCola){ desuscribirCola(); desuscribirCola=null; }
-  if(!db || !nubeLista || !esImpresoraPrincipal()) return;
-  arranqueCola=Date.now()-1000*60*5;   // ignora lo que quedó de antes de abrir
-  desuscribirCola = refTienda().collection('impresion')
-    .where('estado','==','pendiente')
-    .onSnapshot(snap=>{
-      snap.docChanges().forEach(ch=>{
-        if(ch.type!=='added') return;
-        const t=ch.doc.data();
-        if((t.ts||0) < arranqueCola) return;
-        colaLocal.push({id:ch.doc.id, ...t});
-      });
-      procesarCola();
-    }, ()=>{});
-}
-
-async function procesarCola(){
-  if(imprimiendoCola || !colaLocal.length) return;
-  imprimiendoCola=true;
-  const t=colaLocal.shift();
-  pintarCola();
-  try{
-    const ped=S.pedidos.find(x=>x.id===t.pedidoId);
-    if(ped){
-      // se marca antes, para que otro equipo no lo repita
-      try{ await refTienda().collection('impresion').doc(t.id).update({estado:'impreso', impresoTs:Date.now()}); }catch(e){}
-      await imprimir(ped, t.tipo||'comanda');
-      toast('Impreso desde otro equipo · '+nPed(ped));
-    } else {
-      // el pedido aún no bajó de la nube: se reintenta en unos segundos
-      colaLocal.push(t);
-      await new Promise(r=>setTimeout(r,2500));
-    }
-  }catch(e){}
-  imprimiendoCola=false;
-  pintarCola();
-  if(colaLocal.length) setTimeout(procesarCola,800);
-}
-
-function pintarCola(){
-  const el=$$('#colaImpr'); if(!el) return;
-  const n=colaLocal.length;
-  el.style.display = n? 'flex':'none';
-  el.innerHTML = n? `🖨 ${n} comanda(s) por imprimir <button id="colaGo">Imprimir ahora</button>` : '';
-  const b=$$('#colaGo'); if(b) b.onclick=()=>{ imprimiendoCola=false; procesarCola(); };
-}
-
 /* ================= anulación con registro ================= */
 const MOTIVOS=['Se equivocó el cliente','Error al tomar el pedido','Producto sin stock',
                'El cliente no llegó','Pedido duplicado','Prueba del sistema'];
@@ -2304,6 +2276,7 @@ function anularPedido(p){
       p.estadoPrevio=p.estado;
       p.estado='anulado';
       p.anulacion={motivo, ts:Date.now()};
+      pasaportePedido(p, true);
       anotar('Pedido anulado', nPed(p)+' · '+motivo, p.total||0);
       await guardarYa(); cerrarModal();
       renderCocina(); pintarBadge();
@@ -2319,9 +2292,526 @@ function reactivarPedido(p){
   if(!confirm('Volver a activar el pedido '+nPed(p)+'?')) return;
   p.estado=p.estadoPrevio||'pendiente';
   p.reactivado=Date.now();
+  pasaportePedido(p, false);
   guardarYa(); renderCocina(); pintarBadge();
   if($('#v-caja').classList.contains('on')) renderCaja();
   toast('Pedido reactivado');
+}
+
+/* ================= PASAPORTE (fidelización de clientes) =================
+   Cada cliente se identifica por su teléfono. Cada shawarma comprado por un
+   canal directo suma sellos; al llegar a la meta se canjea un premio con PIN.
+   Los sellos se guardan como movimientos (suma, canje, ajuste): así anular un
+   pedido revierte justo lo que ese pedido movió, y dos equipos pueden trabajar
+   a la vez sin pisarse (los movimientos se unen, no se reemplazan). */
+function cfgFidel(){
+  if(!S.fidel) S.fidel={activo:true, locales:{aliali:true}, meta:8,
+    premio:'Shawarma a elección (sin premium)',
+    excluir:['Pedidos Ya','Uber Eats','Rappi','JUNAEB'], dobles:[], inactivo:21};
+  const F=S.fidel;
+  if(F.bienvenida===undefined) F.bienvenida=true;   // el primer sello va por la casa
+  if(!F.cupon) F.cupon='siempre';                    // siempre | nuevos | no
+  if(!F.modo) F.modo='compra';                       // compra: 1 sello por pedido · shawarma: 1 por shawarma
+  if(!(F.v>=2)){                                     // tarjeta de 10: sorpresa en el 6, shawarma en el 10
+    F.meta=10; F.premio='Shawarma a elección (sin premium)';
+    F.hitos=[{en:6}];
+    F.v=2;
+  }
+  if(!(F.v>=3)){                                     // el sello 6 ahora sortea entre varios premios, no siempre papas
+    F.hitos=(F.hitos||[]).map(h=>({en:h.en}));         // se guarda solo la posición; el premio se sortea al vuelo
+    F.premiosHito=[
+      {n:'Porción de falafel', prod:'Falafel (9 un.)', base:'U'},
+      {n:'Papas fritas chicas', prod:'Porción de papas fritas', base:'Chica'},
+      {n:'1 Kibbe', prod:'Kibbe (1 un.)', base:'U'},
+      {n:'Salsa extra', prod:'Salsa extra', base:'Mediana'}
+    ];
+    F.v=3;
+  }
+  if(!Array.isArray(F.hitos)) F.hitos=[];
+  if(!Array.isArray(F.premiosHito) || !F.premiosHito.length) F.premiosHito=[{n:F.premio}];
+  if(!F.locales) F.locales={aliali:true};
+  if(!Array.isArray(F.excluir)) F.excluir=[];
+  if(!Array.isArray(F.dobles)) F.dobles=[];
+  if(!(F.meta>0)) F.meta=8;
+  if(!(F.inactivo>0)) F.inactivo=21;
+  return F;
+}
+// JSON con las claves ordenadas: la nube devuelve los campos en otro orden
+const canon = o => JSON.stringify(o, (k,v)=> v && typeof v==='object' && !Array.isArray(v)
+  ? Object.keys(v).sort().reduce((a,x)=>(a[x]=v[x],a),{}) : v);
+function cli(){ if(!S.clientes || typeof S.clientes!=='object') S.clientes={}; return S.clientes; }
+const fidelOn = (local)=> { const F=cfgFidel(); return !!(F.activo && F.locales[local||S.local]); };
+const escH = t => String(t??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const DIAS_SEM=[['1','Lun'],['2','Mar'],['3','Mié'],['4','Jue'],['5','Vie'],['6','Sáb'],['0','Dom']];
+const esDiaDoble = ()=> cfgFidel().dobles.includes(String(new Date().getDay()));
+
+// Deja el número en 9 dígitos (formato celular chileno). Vacío si no alcanza.
+function normFono(t){
+  let d=String(t||'').replace(/\D/g,'');
+  if(d.startsWith('56') && d.length>=11) d=d.slice(2);
+  if(d.length===8) d='9'+d;
+  return d.length===9 ? d : '';
+}
+const fonoBonito = tel => tel ? `+56 ${tel[0]} ${tel.slice(1,5)} ${tel.slice(5)}` : '';
+const movsVivos = c => (c.movs||[]).filter(m=>!m.anulado);
+const sellosDe  = c => Math.max(0, movsVivos(c).reduce((a,m)=>a+(Number(m.n)||0),0));
+const ultimaCompra = c => movsVivos(c).filter(m=>m.tipo==='suma'||m.tipo==='visita').reduce((a,m)=>Math.max(a,m.ts||0),0) || c.creado || 0;
+const gastoDe   = c => movsVivos(c).filter(m=>m.tipo==='suma'||m.tipo==='visita').reduce((a,m)=>a+(Number(m.monto)||0),0);
+const diasDesde = ts => ts ? Math.floor((Date.now()-ts)/86400000) : null;
+
+// El sello de cortesía se muestra en el primer círculo mientras el cliente
+// no haya canjeado su primer premio.
+const tieneCortesia = c => !!c && movsVivos(c).some(m=>m.tipo==='bienvenida') && !movsVivos(c).some(m=>m.tipo==='canje' && !m.hito);
+// Clientes que ya existían antes de activar la cortesía: se les regala una vez.
+// El id fijo evita que dos equipos regalen dos veces al mismo cliente.
+function aplicarBienvenidas(){
+  const F=cfgFidel(); if(!F.bienvenida || F.bienvenidaMig) return;
+  Object.values(cli()).forEach(c=>{
+    if(!c || c.borrado || !Array.isArray(c.movs)) return;
+    if(c.movs.some(m=>m.id==='bienvenida'||m.tipo==='canje')) return;
+    c.movs.unshift({id:'bienvenida', tipo:'bienvenida', n:1, ts:c.creado||Date.now(), fecha:hoy()});
+    c.mod=Date.now();
+  });
+  F.bienvenidaMig=true; guardar();
+}
+
+// Sellos que da un pedido: de a uno por compra (con al menos un shawarma),
+// o uno por cada shawarma si así se configura en Ajustes.
+function sellosPedido(items, local){
+  const n=sellosItems(items, local);
+  return cfgFidel().modo==='shawarma' ? n : (n>0 ? 1 : 0);
+}
+
+// Cuántos shawarmas trae una lista de líneas del ticket
+function sellosItems(items, local){
+  const menu=(S.locales[local||S.local]||{}).menu||[];
+  return (items||[]).reduce((a,i)=>{
+    if(i.premio) return a;
+    const prod = menu.find(p=>p.id===i.pid) || menu.find(p=> i.n===p.n || String(i.n).startsWith(p.n+' '));
+    if(!prod) return a;
+    const q=Number(i.q)||1;
+    if(['Shawarmas','Premium','Shawarma del mes'].includes(prod.cat)) return a+q;
+    const sw=(prod.elige||[]).find(e=>e.tipo==='shawarma');
+    return sw ? a + sw.n*q : a;
+  },0);
+}
+
+function clienteDe(tel, crear, nombre){
+  const C=cli();
+  if(C[tel] && !C[tel].borrado) return C[tel];
+  if(!crear) return null;
+  C[tel]={tel, nombre:(nombre||'').trim(), cumple:'', creado:Date.now(), mod:Date.now(), movs:[]};
+  return C[tel];
+}
+
+// Se llama al enviar el pedido a cocina
+function registrarPasaporte(p, items){
+  if(!fidelOn(p.local)) return null;
+  const tel=normFono(p.fono); if(!tel) return null;
+  const F=cfgFidel();
+  const canjes=(items||[]).filter(i=>i.premio && !i.hito).reduce((a,i)=>a+(Number(i.q)||1),0);
+  const hitosCanje=[...new Set((items||[]).filter(i=>i.premio && i.hito).map(i=>i.hito))];
+  const porApp=(p.pagos||[]).some(x=>F.excluir.includes(x.medio));
+  const n = porApp ? 0 : sellosPedido(items,p.local)*(esDiaDoble()?2:1);
+  const eraNuevo=!clienteDe(tel,false);
+  const c=clienteDe(tel, true, p.cliente);
+  if(p.cliente && !c.nombre) c.nombre=p.cliente;
+  let regalo=0;
+  if(eraNuevo && F.bienvenida && !c.movs.some(m=>m.id==='bienvenida')){
+    c.movs.push({id:'bienvenida', tipo:'bienvenida', n:1, pedido:p.id, num:p.num, local:p.local, ts:Date.now(), fecha:p.fecha});
+    regalo=1;
+  }
+  if(draft && draft.cumple && !c.cumple) c.cumple=draft.cumple;
+  const base={pedido:p.id, num:p.num, local:p.local, ts:Date.now(), fecha:p.fecha};
+  if(n) c.movs.push({...base, id:uid(), tipo:'suma', n, monto:p.total||0});
+  else if(!porApp) c.movs.push({...base, id:uid(), tipo:'visita', n:0, monto:p.total||0});
+  const ciclo=cicloDe(c);
+  hitosCanje.forEach(en=> c.movs.push({...base, id:uid(), tipo:'canje', hito:en, n:0, ciclo}));
+  if(canjes) c.movs.push({...base, id:uid(), tipo:'canje', n:-F.meta*canjes});
+  c.mod=Date.now();
+  p.pasaporte={tel, sellos:n, canjes:canjes+hitosCanje.length, saldo:sellosDe(c), porApp, nuevo:eraNuevo, regalo,
+    cortesia:tieneCortesia(c), nombre:c.nombre||''};
+  return p.pasaporte;
+}
+
+// Anular (true) o reactivar (false) un pedido mueve también sus sellos
+function pasaportePedido(p, anular){
+  const tel=p.pasaporte&&p.pasaporte.tel; if(!tel) return;
+  const c=cli()[tel]; if(!c) return;
+  let toco=false;
+  (c.movs||[]).forEach(m=>{ if(m.pedido===p.id && !!m.anulado!==anular){ m.anulado=anular; m.am=Date.now(); toco=true; } });
+  if(toco){ c.mod=Date.now(); p.pasaporte.saldo=sellosDe(c); p.pasaporte.cortesia=tieneCortesia(c); }
+}
+
+// Une dos versiones del mismo cliente (este equipo y la nube)
+function unirCliente(a,b){
+  if(!a) return b; if(!b) return a;
+  const nuevo=(a.mod||0)>=(b.mod||0)?a:b;
+  const movs={};
+  [...(a.movs||[]),...(b.movs||[])].forEach(m=>{
+    const ya=movs[m.id];
+    if(!ya || (m.am||0)>(ya.am||0)) movs[m.id]=m;
+  });
+  return {...nuevo, creado:Math.min(a.creado||Date.now(), b.creado||Date.now()),
+    movs:Object.values(movs).sort((x,y)=>(x.ts||0)-(y.ts||0))};
+}
+
+/* ---------- Premios escalonados ----------
+   La tarjeta tiene F.meta círculos (10). En ciertos círculos hay premios
+   intermedios (F.hitos: papas en el 6) que se canjean sin gastar sellos, una
+   vez por tarjeta. El premio final (círculo 10) descuenta la tarjeta completa
+   y el cliente parte una nueva. */
+const hitosF = ()=> { const F=cfgFidel(); return (F.hitos||[]).filter(h=>h.en>0 && h.en<F.meta).sort((a,b)=>a.en-b.en); };
+const cortoDe = t => (String(t||'').trim().split(/\s+/)[0]||'premio').toLowerCase();
+// Hash simple y estable (FNV-1a): mismo teléfono + misma ronda = mismo resultado, en cualquier equipo
+function hashNum(s){ let h=0x811c9dc5; for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,0x01000193); } return h>>>0; }
+// Sortea sin repetir el de la ronda anterior: recorre las rondas 0..ciclo, evitando que la actual
+// caiga en el mismo índice que la de antes.
+function indiceSorteo(tel, ciclo, largo){
+  if(largo<=0) return -1;
+  let prev=-1, idx=0;
+  for(let k=0;k<=ciclo;k++){
+    idx=hashNum(tel+'#'+k)%largo;
+    if(idx===prev) idx=(idx+1)%largo;
+    prev=idx;
+  }
+  return idx;
+}
+// El premio sorpresa que le toca a ESTE cliente en ESTA ronda de su tarjeta
+function hitoDe(tel, en, ciclo){
+  const pool=cfgFidel().premiosHito;
+  const it=pool[indiceSorteo(tel, ciclo, pool.length)] || {n:cfgFidel().premio};
+  return {en, ...it};
+}
+// N° de tarjetas completas ya canjeadas: identifica la tarjeta actual
+const cicloDe = c => movsVivos(c).filter(m=>m.tipo==='canje' && !m.hito).reduce((a,m)=>a+Math.round(-m.n/cfgFidel().meta),0);
+const hitoUsado = (c,h) => { const ci=cicloDe(c); return movsVivos(c).some(m=>m.tipo==='canje' && m.hito===h.en && (m.ciclo||0)===ci); };
+// Premios que el cliente puede pedir ahora. enDraft: líneas de premio ya agregadas al pedido
+function premiosListos(c, enDraft){
+  const F=cfgFidel(), out=[]; if(!c) return out;
+  const s=sellosDe(c), ya=enDraft||[], ciclo=cicloDe(c);
+  hitosF().forEach(h=>{
+    if(s>=h.en && !hitoUsado(c,h) && !ya.some(i=>i.hito===h.en)){
+      const it=hitoDe(c.tel, h.en, ciclo);
+      out.push({tipo:'hito', h:it, texto:it.n});
+    }
+  });
+  const finales=ya.filter(i=>i.premio && !i.hito).length;
+  const nFin=Math.floor(s/F.meta)-finales;
+  for(let i=0;i<nFin;i++) out.push({tipo:'final', texto:F.premio});
+  return out;
+}
+// Lo que viene: el próximo círculo con premio que todavía no alcanza
+function proximoPremio(c){
+  const F=cfgFidel(), s=c?sellosDe(c):0;
+  const h=hitosF().find(h=>s<h.en && !(c&&hitoUsado(c,h)));
+  if(h){ const it=hitoDe(c?c.tel:'', h.en, c?cicloDe(c):0); return {en:h.en, falta:h.en-s, texto:it.n}; }
+  return {en:F.meta, falta:Math.max(0,F.meta-s), texto:F.premio};
+}
+// Frases para cupón, boleta y WhatsApp
+function frasesPasaporte(c){
+  const F=cfgFidel(), s=c?sellosDe(c):0, listos=premiosListos(c), prox=proximoPremio(c);
+  const lineas=[];
+  if(listos.length) lineas.push('¡Tienes listo: '+listos.map(x=>x.texto).join(' + ')+'!');
+  lineas.push(`Llevas ${Math.min(s,F.meta)} de ${F.meta}`);
+  if(prox.falta>0) lineas.push(`Te falta${prox.falta>1?'n':''} ${prox.falta} para: ${prox.texto}`);
+  return lineas;
+}
+function reglaPremios(){
+  const F=cfgFidel(), pool=(F.premiosHito||[]).map(x=>x.n).join(', ');
+  return [...hitosF().map(h=>`Sello ${h.en}: premio sorpresa${pool?' ('+pool+')':''}`), `Sello ${F.meta}: ${F.premio}`];
+}
+
+/* ---------- En el ticket ---------- */
+function pintarPasaporte(){
+  const box=$$('#pasaporte'); if(!box || !draft) return;
+  if(!fidelOn()){ box.innerHTML=''; return; }
+  const F=cfgFidel(), tel=normFono(draft.fono);
+  const doble=esDiaDoble();
+  const suma=sellosPedido(draft.items,S.local)*(doble?2:1);
+  const cNow=tel?clienteDe(tel,false):null;
+  const regaloPrev = !!tel && !cNow && F.bienvenida;
+  const txtSuma = (suma ? `Este pedido suma ${suma} sello${suma>1?'s':''}${doble?' (día de sello doble)':''}` : (F.modo==='compra' ? 'Suma 1 sello si lleva al menos un shawarma' : 'Este pedido aún no suma sellos'))
+    + (regaloPrev ? ', más 1 de regalo por ser nuevo' : '');
+  if(!tel){
+    box.innerHTML=`<div class="pp pp-mute">🎟️ ${String(draft.fono||'').trim()
+      ? 'Al teléfono le faltan dígitos para el pasaporte'
+      : 'Pasaporte: anota el teléfono para sumar sellos'}${suma?' · '+txtSuma.toLowerCase():''}</div>`;
+    return;
+  }
+  const c=cNow;
+  if(c && c.nombre && !String(draft.cliente||'').trim()){
+    draft.cliente=c.nombre; const fc=$$('#f-cli'); if(fc) fc.value=c.nombre;
+  }
+  const lineasPremio=draft.items.filter(i=>i.premio);
+  const usadosFin=lineasPremio.filter(i=>!i.hito).length;
+  const s=c?sellosDe(c):0;
+  const efect=Math.max(0, s-usadosFin*F.meta);
+  const cortesia = c ? (tieneCortesia(c) && !usadosFin) : F.bienvenida;
+  const llenos=Math.min(efect, F.meta);
+  const listos=premiosListos(c, lineasPremio);
+  const cicloAct = c ? cicloDe(c) : 0;
+  const hitos=hitosF().map(h=>hitoDe(tel, h.en, cicloAct));
+  const puntos=Array.from({length:F.meta},(_,i)=>{
+    const h=hitos.find(h=>h.en===i+1);
+    if(i===F.meta-1) return `<i class="${llenos>=F.meta?'on premio':'meta'}" title="${escH(F.premio)}">🎁</i>`;
+    if(i===0 && cortesia) return `<i class="on cortesia" title="Sello de cortesía">★</i>`;
+    if(h) return `<i class="${i<llenos?'on hito':'meta'}" title="${escH(h.n)}">✨</i>`;
+    return `<i class="${i<llenos?'on':''}">${i<llenos?'🌯':''}</i>`;
+  }).join('');
+  const nuevo=!c;
+  box.innerHTML=`<div class="pp">
+    <div class="pp-top"><b>${nuevo?'Cliente nuevo':escH(c.nombre||'Cliente sin nombre')}</b><span>${listos.length?'premio listo':`${llenos}/${F.meta}`}</span></div>
+    <div class="sellos">${puntos}</div>
+    <div class="pp-sub">${nuevo?'Se registra al enviar el pedido. ':''}${txtSuma}.${lineasPremio.length?` Canjeando: ${lineasPremio.length} premio${lineasPremio.length>1?'s':''}.`:''}</div>
+    ${nuevo && draft.modo==='local'?`<input id="pp-nom" placeholder="Nombre del cliente" value="${escH(draft.cliente)}">`:''}
+    ${nuevo?`<input id="pp-cum" placeholder="Cumpleaños, día-mes (opcional)" inputmode="numeric" value="${escH(draft.cumple||'')}">`:''}
+    ${listos.map((x,k)=>`<button class="pp-canje${x.tipo==='hito'?' hito':''}" data-cj="${k}">${x.tipo==='hito'?'✨':'🎁'} Canjear ${escH(x.texto)}</button>`).join('')}
+    ${c?`<button id="pp-print" class="pp-print">🖨️ Imprimir su pasaporte</button>`:''}
+    ${c&&enlacePasaporte(tel)?`<button id="pp-link" class="pp-print">🔗 Copiar su enlace</button>`:''}
+    ${c?`<button id="pp-img" class="pp-print">⬇️ Descargar tarjeta</button>`:''}
+  </div>`;
+  const pr=$$('#pp-print'); if(pr) pr.onclick=()=>imprimirPasaporte(tel);
+  const lk=$$('#pp-link'); if(lk) lk.onclick=()=>copiar(enlacePasaporte(tel),'Enlace del pasaporte copiado');
+  const im=$$('#pp-img'); if(im) im.onclick=()=>descargarTarjeta(tel);
+  const nm=$$('#pp-nom'); if(nm) nm.oninput=e=>draft.cliente=e.target.value;
+  const cu=$$('#pp-cum'); if(cu) cu.oninput=e=>draft.cumple=e.target.value.trim();
+  box.querySelectorAll('[data-cj]').forEach(b=> b.onclick=()=>canjearPremio(listos[+b.dataset.cj]));
+}
+
+async function canjearPremio(x){
+  const F=cfgFidel(), tel=normFono(draft.fono), c=clienteDe(tel,false);
+  if(!c || !x) return;
+  const vigente=premiosListos(c, draft.items.filter(i=>i.premio)).some(y=>y.tipo===x.tipo && (y.h?.en===x.h?.en));
+  if(!vigente) return toast('Ese premio ya no está disponible');
+  if(!(await pedirPin('Canje de '+x.texto+' · '+(c.nombre||fonoBonito(tel))))) return;
+  // Qué productos sirven para el premio
+  let ops, base;
+  if(x.tipo==='hito'){
+    const h=x.h;
+    ops=L().menu.filter(p=>p.n===h.prod);
+    base=prod=> prod.precios[h.base] ?? Math.min(...Object.values(prod.precios));
+  } else {
+    ops=L().menu.filter(p=>p.cat==='Shawarmas');
+    base=null;
+  }
+  if(!ops.length) return toast('No encontré el producto del premio en la carta');
+  const agregar=prod=> abrirConfig(prod, null, linea=>{
+    const tam=(linea.cfg&&linea.cfg.tam)||Object.keys(prod.precios)[0];
+    const b = base ? base(prod) : (prod.precios[tam] ?? Object.values(prod.precios)[0]);
+    linea.p=Math.max(0, linea.p-b);
+    linea.q=1; linea.premio=true;
+    if(x.tipo==='hito') linea.hito=x.h.en;
+    linea.n=(x.tipo==='hito'?'✨ ':'🎁 ')+linea.n+' · premio pasaporte';
+    draft.items.push(linea);
+    renderTicket(); toast('Premio agregado al pedido');
+  });
+  if(ops.length===1) return agregar(ops[0]);
+  $('#modalBox').innerHTML=`
+    <h4>🎁 Elige el premio</h4>
+    <div class="sb">${escH(x.texto)}. Queda a $0; solo se cobran los extras o si sube de tamaño.</div>
+    <div class="ops">${ops.map(p=>`<button data-pp="${p.id}">${escH(p.n)}</button>`).join('')}</div>
+    <div class="modal-acc"><button class="btn" id="ppNo">Cancelar</button></div>`;
+  $('#modal').classList.add('on');
+  $('#ppNo').onclick=cerrarModal;
+  $('#modalBox').querySelectorAll('[data-pp]').forEach(b=> b.onclick=()=>{
+    const prod=ops.find(p=>p.id===b.dataset.pp); if(prod) agregar(prod);
+  });
+}
+
+/* ---------- Pestaña Clientes ---------- */
+let filtroCli='todos', buscaCli='';
+function enlacePasaporte(tel){
+  const n=cfgNube(); if(!n.activo || !n.apiKey || !n.proyecto || !n.tienda) return '';
+  const base=location.href.replace(/comandera[^/]*\.html.*$/i,'pasaporte.html');
+  return base+`?p=${encodeURIComponent(n.proyecto)}&k=${encodeURIComponent(n.apiKey)}&t=${encodeURIComponent(n.tienda)}&fono=${tel}`;
+}
+function waLink(c){
+  const F=cfgFidel(), s=sellosDe(c), nom=(c.nombre||'').split(' ')[0];
+  const hola = nom ? `Hola ${nom}!` : 'Hola!';
+  const nombreLocal = (S.locales.aliali||L()).nombre || 'Ali Ali';
+  let txt; const listos=premiosListos(c), prox=proximoPremio(c);
+  if(listos.length) txt=`${hola} 🎁 Tienes listo en tu pasaporte de ${nombreLocal}: ${listos.map(x=>x.texto).join(' + ')}. Pídelo en tu próxima compra.`;
+  else if((diasDesde(ultimaCompra(c))||0)>=F.inactivo)
+    txt=`${hola} Te echamos de menos en ${nombreLocal} 🌯 Llevas ${Math.min(s,F.meta)} de ${F.meta} sellos: te falta${prox.falta>1?'n':''} ${prox.falta} para ${prox.texto.toLowerCase()} gratis.`;
+  else txt=`${hola} Llevas ${Math.min(s,F.meta)} de ${F.meta} sellos en tu pasaporte de ${nombreLocal}. Te falta${prox.falta>1?'n':''} ${prox.falta} para ${prox.texto.toLowerCase()} gratis 🌯`;
+  const link=enlacePasaporte(c.tel);
+  if(link) txt+=`\nMira tu pasaporte aquí: ${link}`;
+  return 'https://wa.me/56'+c.tel+'?text='+encodeURIComponent(txt);
+}
+function cumpleEsteMes(c){
+  const m=String(c.cumple||'').match(/^(\d{1,2})\D+(\d{1,2})/);
+  return !!m && +m[2]===new Date().getMonth()+1;
+}
+function listaClientes(){
+  const F=cfgFidel(), q=buscaCli.trim().toLowerCase(), qd=q.replace(/\D/g,'');
+  return Object.values(cli()).filter(c=>!c.borrado)
+    .filter(c=> !q || (c.nombre||'').toLowerCase().includes(q) || (qd && c.tel.includes(qd)))
+    .filter(c=>{
+      if(filtroCli==='premio') return premiosListos(c).length>0;
+      if(filtroCli==='inactivos') return (diasDesde(ultimaCompra(c))||0)>=F.inactivo;
+      if(filtroCli==='cumple') return cumpleEsteMes(c);
+      return true;
+    })
+    .sort((a,b)=> filtroCli==='inactivos' ? ultimaCompra(a)-ultimaCompra(b) : ultimaCompra(b)-ultimaCompra(a));
+}
+function renderClientes(){
+  const v=$$('#v-clientes'); if(!v) return;
+  const F=cfgFidel(), todos=Object.values(cli()).filter(c=>!c.borrado);
+  const mes=hoy().slice(0,7);
+  const movsMes=todos.flatMap(c=>movsVivos(c)).filter(m=>(m.fecha||'').startsWith(mes));
+  const sellosMes=movsMes.filter(m=>m.tipo==='suma').reduce((a,m)=>a+m.n,0);
+  const canjesMes=movsMes.filter(m=>m.tipo==='canje').reduce((a,m)=>a+(m.hito?1:Math.round(-m.n/F.meta)),0);
+  const listos=todos.filter(c=>premiosListos(c).length>0).length;
+  const lista=listaClientes();
+  const FILTROS=[['todos','Todos'],['premio','Premio listo'],['inactivos',`Sin comprar hace ${F.inactivo}+ días`],['cumple','Cumpleaños este mes']];
+  v.innerHTML=`
+    ${!F.activo?`<div class="panel" style="border-color:var(--ambar)"><b>El pasaporte está apagado.</b> Actívalo en Ajustes para que los pedidos sumen sellos.</div>`:''}
+    <div class="kpis">
+      <div class="kpi destaca"><div class="k">Clientes</div><div class="v">${todos.length}</div></div>
+      <div class="kpi"><div class="k">Sellos este mes</div><div class="v">${sellosMes}</div></div>
+      <div class="kpi"><div class="k">Premios canjeados</div><div class="v">${canjesMes}</div></div>
+      <div class="kpi"><div class="k">Con premio listo</div><div class="v">${listos}</div></div>
+    </div>
+    <div class="cl-bar">
+      <input id="cl-busca" placeholder="Buscar por nombre o teléfono" value="${escH(buscaCli)}" autocomplete="off">
+      <button class="btn" id="cl-copiar">Copiar números</button>
+      <button class="btn dark" id="cl-ajustes">Ajustes</button>
+    </div>
+    <div class="ops" style="margin-bottom:12px">${FILTROS.map(([k,t])=>`<button data-fc="${k}" class="${filtroCli===k?'on':''}">${t}</button>`).join('')}</div>
+    <div class="panel cl-list">
+      ${lista.length ? lista.slice(0,300).map(c=>{
+        const s=sellosDe(c), d=diasDesde(ultimaCompra(c));
+        const estado = premiosListos(c).length ? `<span class="tag-ok">🎁 premio listo</span>`
+          : (d!==null && d>=F.inactivo ? `<span class="tag-frio">hace ${d} días</span>` : '');
+        return `<div class="cl">
+          <div class="info">
+            <div class="nm">${escH(c.nombre||'Sin nombre')} ${estado}</div>
+            <div class="mt">${fonoBonito(c.tel)} · ${Math.min(s,F.meta)}/${F.meta} sellos${s>F.meta?` (+${s-F.meta})`:''} · ${d===null?'sin compras':(d===0?'compró hoy':`última compra hace ${d} día${d>1?'s':''}`)} · ${CLP(gastoDe(c))}</div>
+            <div class="barra"><i style="width:${Math.min(100,Math.round(s/F.meta*100))}%"></i></div>
+          </div>
+          <div class="ac">
+            <a href="${waLink(c)}" target="_blank" rel="noopener">WhatsApp</a>
+            <button data-cl="${c.tel}">Ver</button>
+          </div>
+        </div>`;}).join('')
+      : `<div class="vacio">${todos.length
+          ? 'Nadie calza con ese filtro.'
+          : 'Aún no hay clientes. Anota el teléfono al tomar un pedido de Ali Ali y el cliente queda registrado con sus sellos.'}</div>`}
+    </div>`;
+  const bi=$$('#cl-busca');
+  bi.oninput=e=>{ buscaCli=e.target.value; const pos=e.target.selectionStart; renderClientes();
+    const n=$$('#cl-busca'); n.focus(); try{ n.setSelectionRange(pos,pos); }catch(_){} };
+  v.querySelectorAll('[data-fc]').forEach(b=> b.onclick=()=>{ filtroCli=b.dataset.fc; renderClientes(); });
+  v.querySelectorAll('[data-cl]').forEach(b=> b.onclick=()=>verCliente(b.dataset.cl));
+  $$('#cl-copiar').onclick=()=>{
+    if(!lista.length) return toast('No hay números en este filtro');
+    copiar(lista.map(c=>'+56'+c.tel).join('\n'), lista.length+' número(s) copiados');
+  };
+  $$('#cl-ajustes').onclick=ajustesFidel;
+}
+
+function verCliente(tel){
+  const F=cfgFidel(), c=cli()[tel]; if(!c) return;
+  const s=sellosDe(c);
+  const NOMBRE={suma:'Compra',visita:'Compra sin sellos',canje:'Premio canjeado',ajuste:'Ajuste manual',bienvenida:'Sello de cortesía'};
+  const movs=(c.movs||[]).slice().reverse().slice(0,40);
+  $('#modalBox').innerHTML=`
+    <h4>${escH(c.nombre||'Sin nombre')}</h4>
+    <div class="sb">${fonoBonito(c.tel)} · cliente desde ${new Date(c.creado||Date.now()).toLocaleDateString('es-CL')} · ${CLP(gastoDe(c))} en total</div>
+    <div class="pp" style="margin:0 0 6px"><div class="pp-top"><b>${s>=F.meta?'🎁 Premio listo':'Sellos'}</b><span>${s}/${F.meta}</span></div>
+      <div class="barra"><i style="width:${Math.min(100,Math.round(s/F.meta*100))}%"></i></div></div>
+    <div class="g-t">Datos</div>
+    <input id="vc-nom" class="num-in" placeholder="Nombre" value="${escH(c.nombre)}">
+    <input id="vc-cum" class="num-in" style="margin-top:7px" placeholder="Cumpleaños, día-mes" value="${escH(c.cumple)}">
+    <div class="g-t">Ajustar sellos <span>pide PIN</span></div>
+    <div class="ops"><button data-aj="-1">− 1 sello</button><button data-aj="1">+ 1 sello</button></div>
+    <div class="g-t">Historial</div>
+    <div style="font-size:12.5px;line-height:1.5">${movs.length?movs.map(m=>`
+      <div style="display:flex;gap:8px;justify-content:space-between;padding:5px 0;border-bottom:1px dashed var(--linea);${m.anulado?'opacity:.45;text-decoration:line-through':''}">
+        <span>${new Date(m.ts).toLocaleDateString('es-CL')} · ${m.tipo==='canje'&&m.hito?'Premio del sello '+m.hito:(NOMBRE[m.tipo]||m.tipo)}${m.num?' #'+String(m.num).padStart(3,'0'):''}${m.motivo?' · '+escH(m.motivo):''}</span>
+        <b style="font-family:var(--mono);color:${m.n>0?'var(--verde)':(m.n<0?'var(--brasa)':'var(--gris)')}">${m.n>0?'+':''}${m.n}</b>
+      </div>`).join(''):'<div class="vacio" style="padding:12px">Sin movimientos</div>'}</div>
+    <div class="modal-acc">
+      <button class="btn danger" id="vc-del">Borrar</button>
+      <button class="btn" id="vc-print">🖨️ Pasaporte</button>
+      ${enlacePasaporte(tel)?`<button class="btn" id="vc-link">🔗 Enlace</button>`:''}
+      <button class="btn" id="vc-img">⬇️ Tarjeta</button>
+      <a class="btn" style="text-decoration:none;color:inherit" href="${waLink(c)}" target="_blank" rel="noopener">WhatsApp</a>
+      <button class="btn dark" id="vc-ok">Guardar</button>
+    </div>`;
+  $('#modal').classList.add('on');
+  $('#modalBox').querySelectorAll('[data-aj]').forEach(b=> b.onclick=async()=>{
+    const n=+b.dataset.aj;
+    if(n<0 && s<=0) return toast('No tiene sellos para quitar');
+    if(!(await pedirPin('Ajuste manual de sellos'))) return;
+    const motivo=(prompt('Motivo del ajuste (opcional)')||'').trim();
+    c.movs.push({id:uid(), tipo:'ajuste', n, motivo, ts:Date.now(), fecha:hoy(), local:S.local});
+    c.mod=Date.now(); anotar('Ajuste de sellos', fonoBonito(tel)+' '+(n>0?'+':'')+n+(motivo?' · '+motivo:''), 0);
+    await guardarYa(); verCliente(tel); renderClientes();
+  });
+  $('#vc-print').onclick=()=>{ cerrarModal(); imprimirPasaporte(tel); };
+  const vl=$$('#vc-link'); if(vl) vl.onclick=()=>copiar(enlacePasaporte(tel),'Enlace del pasaporte copiado');
+  $$('#vc-img').onclick=()=>descargarTarjeta(tel);
+  $('#vc-ok').onclick=async()=>{
+    c.nombre=($$('#vc-nom').value||'').trim(); c.cumple=($$('#vc-cum').value||'').trim(); c.mod=Date.now();
+    await guardarYa(); cerrarModal(); renderClientes(); toast('Cliente guardado');
+  };
+  $('#vc-del').onclick=async()=>{
+    if(!confirm('¿Borrar a '+(c.nombre||fonoBonito(tel))+' y todos sus sellos?')) return;
+    if(!(await pedirPin('Borrar cliente del pasaporte'))) return;
+    c.borrado=true; c.mod=Date.now(); anotar('Cliente borrado', fonoBonito(tel), 0);
+    await guardarYa(); cerrarModal(); renderClientes(); toast('Cliente borrado');
+  };
+}
+
+async function ajustesFidel(){
+  if(!(await pedirPin('Ajustes del pasaporte'))) return;
+  const F=JSON.parse(JSON.stringify(cfgFidel()));
+  const pinta=()=>{
+    $('#modalBox').innerHTML=`
+      <h4>Ajustes del pasaporte</h4>
+      <div class="sb">Los cambios valen para los pedidos que vengan. Los sellos que ya tienen los clientes no se tocan.</div>
+      <div class="g-t">Estado</div>
+      <div class="ops"><button data-act="1" class="${F.activo?'on':''}">Encendido</button><button data-act="0" class="${!F.activo?'on':''}">Apagado</button></div>
+      <div class="g-t">Locales que suman sellos</div>
+      <div class="ops">${Object.entries(S.locales).map(([k,l])=>`<button data-loc="${k}" class="${F.locales[k]?'on':''}">${escH(l.nombre)}</button>`).join('')}</div>
+      <div class="g-t">Sellos para el premio</div>
+      <input id="af-meta" class="num-in" type="number" min="2" max="30" value="${F.meta}">
+      <div class="g-t">Premio</div>
+      <input id="af-premio" class="num-in" value="${escH(F.premio)}">
+      <div class="g-t">Cómo se suman los sellos</div>
+      <div class="ops"><button data-modo="compra" class="${F.modo==='compra'?'on':''}">1 por compra</button><button data-modo="shawarma" class="${F.modo==='shawarma'?'on':''}">1 por cada shawarma</button></div>
+      <div class="g-t">Premio sorpresa del sello ${hitosF()[0]?hitosF()[0].en:6}</div>
+      <div class="sb">A cada cliente le toca uno al azar, distinto al de su ronda anterior: ${F.premiosHito.map(x=>escH(x.n)).join(', ')}. Para cambiar esta lista, pídemelo en el chat.</div>
+      <div class="g-t">Primer sello de cortesía</div>
+      <div class="ops"><button data-bv="1" class="${F.bienvenida?'on':''}">Sí, de regalo</button><button data-bv="0" class="${!F.bienvenida?'on':''}">No</button></div>
+      <div class="g-t">Imprimir el cupón del pasaporte</div>
+      <div class="ops">${[['siempre','Con cada boleta'],['nuevos','Solo clientes nuevos'],['no','Solo cuando lo pida']].map(([k,t])=>
+        `<button data-cup="${k}" class="${F.cupon===k?'on':''}">${t}</button>`).join('')}</div>
+      <div class="g-t">Días de sello doble <span>opcional</span></div>
+      <div class="ops">${DIAS_SEM.map(([k,t])=>`<button data-dia="${k}" class="${F.dobles.includes(k)?'on':''}">${t}</button>`).join('')}</div>
+      <div class="g-t">Medios que no suman sellos</div>
+      <div class="ops">${S.pagos.map(m=>`<button data-exc="${escH(m)}" class="${F.excluir.includes(m)?'on':''}">${escH(m)}</button>`).join('')}</div>
+      <div class="g-t">Cliente inactivo después de</div>
+      <input id="af-inac" class="num-in" type="number" min="3" max="120" value="${F.inactivo}">
+      <div class="modal-acc"><button class="btn" id="af-no">Cancelar</button><button class="btn dark" id="af-ok">Guardar ajustes</button></div>`;
+    const box=$('#modalBox');
+    const leer=()=>{ F.meta=Math.max(2,parseInt($$('#af-meta').value)||8); F.premio=($$('#af-premio').value||'').trim()||'Premio';
+      F.inactivo=Math.max(3,parseInt($$('#af-inac').value)||21); };
+    box.querySelectorAll('[data-act]').forEach(b=> b.onclick=()=>{ leer(); F.activo=b.dataset.act==='1'; pinta(); });
+    box.querySelectorAll('[data-modo]').forEach(b=> b.onclick=()=>{ leer(); F.modo=b.dataset.modo; pinta(); });
+    box.querySelectorAll('[data-bv]').forEach(b=> b.onclick=()=>{ leer(); F.bienvenida=b.dataset.bv==='1'; pinta(); });
+    box.querySelectorAll('[data-cup]').forEach(b=> b.onclick=()=>{ leer(); F.cupon=b.dataset.cup; pinta(); });
+    box.querySelectorAll('[data-loc]').forEach(b=> b.onclick=()=>{ leer(); F.locales[b.dataset.loc]=!F.locales[b.dataset.loc]; pinta(); });
+    box.querySelectorAll('[data-dia]').forEach(b=> b.onclick=()=>{ leer(); const k=b.dataset.dia;
+      F.dobles=F.dobles.includes(k)?F.dobles.filter(x=>x!==k):[...F.dobles,k]; pinta(); });
+    box.querySelectorAll('[data-exc]').forEach(b=> b.onclick=()=>{ leer(); const k=b.dataset.exc;
+      F.excluir=F.excluir.includes(k)?F.excluir.filter(x=>x!==k):[...F.excluir,k]; pinta(); });
+    $('#af-no').onclick=cerrarModal;
+    $('#af-ok').onclick=async()=>{ leer(); S.fidel=F; aplicarBienvenidas(); await guardarYa(); cerrarModal(); renderClientes(); pintarPasaporte(); toast('Ajustes guardados'); };
+  };
+  pinta(); $('#modal').classList.add('on');
 }
 
 /* ================= cocina ================= */
@@ -3542,7 +4032,7 @@ function renderCuadre(){
     </div>`;
 
   const g=(id,fn)=>{ const el=$$('#'+id); if(el) el.onchange=fn; };
-  g('c-contado',e=>{ c.efectivoContado = e.target.value===''?null:Number(e.target.value)||0; guardar(); renderCuadre(); });
+  g('c-contado',e=>{ c.efectivoContado = e.target.value===''?null:Number(e.target.value)||0; guardar(); subirCuadreNube(claveCuadre(f)); refrescoSuave(e.target,renderCuadre); });
   g('c-fondo',async e=>{
     const v=Number(e.target.value)||0, antes=num(c.fondo);
     if(v<antes){
@@ -3550,7 +4040,7 @@ function renderCuadre(){
       if(!ok){ renderCuadre(); return; }
     }
     anotar('Fondo de caja', CLP(antes)+' → '+CLP(v), antes-v);
-    c.fondo=v; guardarYa(); renderCuadre();
+    c.fondo=v; guardarYa(); subirCuadreNube(claveCuadre(f)); refrescoSuave(e.target,renderCuadre);
   });
   const elp=$$('#c-proppag');
   if(elp) elp.onchange=()=>{
@@ -3559,27 +4049,27 @@ function renderCuadre(){
     if(v>propinaSis) toast('Las propinas del día son '+CLP(propinaSis));
     c.propinaPagada=Math.min(v, Math.max(0,disponibleTotal), propinaSis);
     anotar('Propinas pagadas', CLP(c.propinaPagada), c.propinaPagada);
-    guardarYa(); renderCuadre();
+    guardarYa(); subirCuadreNube(claveCuadre(f)); refrescoSuave(elp,renderCuadre);
   };
   if($$('#c-propTodo')) $('#c-propTodo').onclick=()=>{
     c.propinaPagada=Math.min(propinaSis, Math.max(0,disponibleTotal));
     anotar('Propinas pagadas', CLP(c.propinaPagada), c.propinaPagada);
-    guardarYa(); renderCuadre();
+    guardarYa(); subirCuadreNube(claveCuadre(f)); renderCuadre();
   };
-  if($$('#c-propNada')) $('#c-propNada').onclick=()=>{ c.propinaPagada=0; guardarYa(); renderCuadre(); };
+  if($$('#c-propNada')) $('#c-propNada').onclick=()=>{ c.propinaPagada=0; guardarYa(); subirCuadreNube(claveCuadre(f)); renderCuadre(); };
   $('#v-cuadre').querySelectorAll('[data-app]').forEach(inp=> inp.onchange=()=>{
-    c.apps[inp.dataset.app]=Number(inp.value)||0; guardar(); renderCuadre();
+    c.apps[inp.dataset.app]=Number(inp.value)||0; guardar(); subirCuadreNube(claveCuadre(f)); refrescoSuave(inp,renderCuadre);
   });
-  g('c-nota',e=>{ c.nota=e.target.value; guardar(); });
+  g('c-nota',e=>{ c.nota=e.target.value; guardar(); subirCuadreNube(claveCuadre(f)); });
   $('#v-cuadre').querySelectorAll('.m-row[data-gasto]').forEach(row=>{
     const gg=c.gastos[+row.dataset.gasto];
-    row.querySelector('.g-n').onchange=e=>{gg.n=e.target.value;guardar();};
-    row.querySelector('.g-m').onchange=e=>{gg.m=Number(e.target.value)||0;guardar();renderCuadre();};
+    row.querySelector('.g-n').onchange=e=>{gg.n=e.target.value;guardar();subirCuadreNube(claveCuadre(f));};
+    row.querySelector('.g-m').onchange=e=>{gg.m=Number(e.target.value)||0;guardar();subirCuadreNube(claveCuadre(f));refrescoSuave(e.target,renderCuadre);};
     row.querySelector('.gdel').onclick=async()=>{
       const ok=await pedirPin('Vas a borrar el gasto "'+(gg.n||'')+'" de '+CLP(gg.m)+'.');
       if(!ok) return;
       anotar('Gasto borrado', gg.n+' '+CLP(gg.m), -num(gg.m));
-      c.gastos.splice(+row.dataset.gasto,1); guardarYa(); renderCuadre();
+      c.gastos.splice(+row.dataset.gasto,1); guardarYa(); subirCuadreNube(claveCuadre(f)); renderCuadre();
     };
   });
   $('#g-go').onclick=async()=>{
@@ -3588,7 +4078,7 @@ function renderCuadre(){
     const ok=await pedirPin('Vas a descontar '+CLP(m)+' de la caja por "'+n+'".');
     if(!ok) return;
     c.gastos.push({n,m,ts:Date.now()}); anotar('Gasto de caja', n, m);
-    guardarYa(); renderCuadre();
+    guardarYa(); subirCuadreNube(claveCuadre(f)); renderCuadre();
   };
   $('#c-prev').onclick=()=>{ moverFecha(-1); renderCuadre(); };
   $('#c-next').onclick=()=>{ if(!esHoy){ moverFecha(1); renderCuadre(); } };
@@ -3630,7 +4120,7 @@ function renderCuadre(){
     const ok=await pedirPin('Vas a borrar el cuadre de este día.');
     if(!ok) return;
     anotar('Cuadre borrado', f, 0);
-    S.cuadres[claveCuadre(f)]=cuadreVacio(); guardarYa(); renderCuadre();
+    S.cuadres[claveCuadre(f)]=cuadreVacio(); guardarYa(); subirCuadreNube(claveCuadre(f)); renderCuadre();
   };
   $('#c-csv').onclick=()=>{
     const filas=[['CUADRE',fechaLarga(f),S.locales[S.local].nombre],[],
@@ -3714,24 +4204,12 @@ function renderMenuAdmin(){
     <div class="panel"><h4>Salsas e indicaciones</h4>
       <div style="font-size:12px;color:var(--gris);font-weight:700;margin-bottom:6px">Salsas (separadas por coma)</div>
       <textarea id="s-salsas" style="width:100%;border:1px solid var(--linea);border-radius:8px;padding:10px;min-height:56px;background:#fff">${loc.salsas.join(', ')}</textarea>
-      <div style="font-size:12px;color:var(--gris);font-weight:700;margin:14px 0 4px">Agregados para cualquier shawarma</div>
-      <div style="font-size:11.5px;color:var(--gris);margin-bottom:7px;line-height:1.45">
-        Se suman al precio del producto. Aparecen en todos los shawarmas y premium.</div>
+      <div style="font-size:12px;color:var(--gris);font-weight:700;margin-bottom:6px">Agregados con precio</div>
       ${(loc.agregados||[]).map((a,ix)=>`<div class="m-row" data-agr="${ix}" style="grid-template-columns:1fr 110px 36px">
         <input class="a-n" value="${a.n}"><input class="a-p" type="number" step="100" value="${a.p}"><button class="del adel">✕</button></div>`).join('')}
       <div class="agregar" style="grid-template-columns:1fr 130px 120px;margin-bottom:6px">
         <input id="ag-n" placeholder="Agregado nuevo"><input id="ag-p" type="number" step="100" placeholder="Precio">
         <button class="btn dark" id="ag-go">Agregar</button></div>
-
-      <div style="font-size:12px;color:var(--gris);font-weight:700;margin:16px 0 4px">Ingredientes del Arma tu Shawarma</div>
-      <div style="font-size:11.5px;color:var(--gris);margin-bottom:7px;line-height:1.45">
-        El cliente elige 5. Los que tienen precio cobran ese recargo; deja el precio en 0 para los incluidos.</div>
-      ${(loc.armaIng||[]).map((a,ix)=>`<div class="m-row" data-arm="${ix}" style="grid-template-columns:1fr 110px 36px">
-        <input class="r-n" value="${a.n}"><input class="r-p" type="number" step="100" value="${a.p||0}"><button class="del rdel">✕</button></div>`).join('')}
-      <div class="agregar" style="grid-template-columns:1fr 130px 120px;margin-bottom:6px">
-        <input id="ar-n" placeholder="Ingrediente nuevo"><input id="ar-p" type="number" step="100" placeholder="Recargo">
-        <button class="btn dark" id="ar-go">Agregar</button></div>
-
       <div style="font-size:12px;color:var(--gris);font-weight:700;margin:12px 0 6px">Bebidas para elegir en las promos</div>
       <textarea id="s-bebidas" style="width:100%;border:1px solid var(--linea);border-radius:8px;padding:10px;min-height:56px;background:#fff">${(loc.bebidas||[]).join(', ')}</textarea>
       <div style="font-size:12px;color:var(--gris);font-weight:700;margin:12px 0 6px">Bebidas calientes (té, café…)</div>
@@ -3784,46 +4262,6 @@ function renderMenuAdmin(){
         <input id="z-nom" placeholder="Ej: 8 a 10 km"><input id="z-pre" type="number" step="100" placeholder="Precio">
         <button class="btn dark" id="z-go">Agregar</button>
       </div>
-    </div>
-
-    <div class="panel" ${esImpresoraPrincipal()?'style="border-color:var(--verde)"':''}>
-      <h4>Impresión entre equipos</h4>
-      <div style="font-size:12.5px;color:var(--gris);line-height:1.55;margin-bottom:10px">
-        Marca como principal el equipo que tiene la impresora conectada. Los pedidos
-        que tomes desde el celular u otro computador se imprimirán solos acá.</div>
-
-      <div class="ops" style="margin-bottom:10px">
-        <button class="tam ${esImpresoraPrincipal()?'on':''}" data-impr="1">🖨 Este equipo imprime</button>
-        <button class="tam ${esImpresoraPrincipal()?'':'on'}" data-impr="0">Este equipo no imprime</button>
-      </div>
-
-      <label style="display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:650;cursor:pointer">
-        <input type="checkbox" id="i-remota" ${S.impresoraRemota?'checked':''} style="width:18px;height:18px">
-        Mandar las comandas al equipo principal</label>
-      <div style="font-size:11.5px;color:var(--gris);margin-top:6px;line-height:1.45">
-        Se aplica a todos los equipos. Si lo desmarcas, cada uno imprime en su propia impresora.</div>
-
-      <div style="font-size:12.5px;font-weight:750;margin-top:12px;color:${
-        !S.impresoraRemota ? 'var(--gris)'
-        : (esImpresoraPrincipal() ? (nubeLista?'var(--verde)':'var(--brasa)') : 'var(--tinta)')}">
-        ${!S.impresoraRemota ? 'Cada equipo imprime por su cuenta'
-          : esImpresoraPrincipal()
-            ? (nubeLista ? '✓ Este equipo está recibiendo e imprimiendo' : '⚠ Falta conectar la nube para recibir')
-            : 'Este equipo envía al principal'}
-      </div>
-
-      ${esImpresoraPrincipal()?`<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--linea)">
-        <div style="font-size:12px;color:var(--gris);font-weight:700;margin-bottom:6px">Para que imprima sin preguntar</div>
-        <div style="font-size:12px;color:var(--gris);line-height:1.6">
-          Chrome muestra el cuadro de impresión salvo que se abra en modo directo.
-          Crea un acceso directo de Chrome, entra a sus propiedades y al final del
-          campo <b style="color:var(--tinta)">Destino</b> agrega un espacio y esto:</div>
-        <div style="font-family:var(--mono);font-size:12px;background:var(--humo);border-radius:8px;
-          padding:9px;margin-top:7px;word-break:break-all">--kiosk-printing</div>
-        <div style="font-size:12px;color:var(--gris);line-height:1.6;margin-top:7px">
-          Abre la comandera desde ese acceso directo y deja la impresora térmica como
-          predeterminada en Windows. Desde ahí sale solo, sin cuadros.</div>
-      </div>`:''}
     </div>
 
     <div class="panel"><h4>Impresora térmica</h4>
@@ -4076,18 +4514,6 @@ function renderMenuAdmin(){
     row.querySelector('.a-p').onchange=e=>{a.p=Math.max(0,parseInt(e.target.value)||0);guardar();};
     row.querySelector('.adel').onclick=()=>{loc.agregados.splice(+row.dataset.agr,1);guardar();renderMenuAdmin();};
   });
-  $('#v-menu').querySelectorAll('.m-row[data-arm]').forEach(row=>{
-    const a=loc.armaIng[+row.dataset.arm];
-    row.querySelector('.r-n').onchange=e=>{a.n=e.target.value.trim();guardar();};
-    row.querySelector('.r-p').onchange=e=>{a.p=Math.max(0,parseInt(e.target.value)||0);guardar();};
-    row.querySelector('.rdel').onclick=()=>{loc.armaIng.splice(+row.dataset.arm,1);guardar();renderMenuAdmin();};
-  });
-  $('#ar-go').onclick=()=>{
-    const n=$('#ar-n').value.trim(); if(!n) return toast('Escribe el ingrediente');
-    if(!loc.armaIng) loc.armaIng=[];
-    loc.armaIng.push({n,p:Math.max(0,parseInt($('#ar-p').value)||0)});
-    guardar(); renderMenuAdmin();
-  };
   $('#ag-go').onclick=()=>{
     const n=$('#ag-n').value.trim(); if(!n) return toast('Escribe el agregado');
     loc.agregados.push({n,p:parseInt($('#ag-p').value)||0}); guardar(); renderMenuAdmin();
@@ -4173,13 +4599,6 @@ function renderMenuAdmin(){
   };
   $('#i-titulo').onchange=e=>{im.titulo=e.target.value;guardar();};
   $('#i-pie').onchange=e=>{im.pie=e.target.value;guardar();};
-  $('#v-menu').querySelectorAll('[data-impr]').forEach(b=> b.onclick=()=>{
-    marcarImpresora(b.dataset.impr==='1');
-    escucharCola();
-    renderMenuAdmin();
-    toast(esImpresoraPrincipal()?'Este equipo imprimirá las comandas':'Este equipo ya no imprime las de otros');
-  });
-  $('#i-remota').onchange=e=>{ S.impresoraRemota=e.target.checked; guardarYa(); renderMenuAdmin(); };
   $('#i-ver').onclick=vistaPrevia;
   $('#i-test').onclick=imprimirPrueba;
   $('#v-menu').querySelectorAll('.m-row[data-cod]').forEach(row=>{
@@ -4385,6 +4804,13 @@ function pintarCupon(bloques, fBase){
   const med=document.createElement('canvas').getContext('2d');
   const lineas=[];
   bloques.forEach(b=>{
+    if(b.t==='sellos'){
+      const cols=Math.min(4,b.total), filas=Math.ceil(b.total/cols);
+      const d=Math.round(Math.min(maxW/cols*0.8, f*2.8));
+      const hFila=d+Math.round(f*0.95);
+      lineas.push({t:'sellos',...b,cols,d,hFila,h:hFila*filas+Math.round(f*0.2)});
+      return;
+    }
     if(b.t==='hr'){ lineas.push({t:'hr',h:Math.round(f*0.75)}); return; }
     if(b.t==='gap'){ lineas.push({t:'gap',h:b.h||Math.round(f*0.45)}); return; }
     const size=b.size||f, bold=b.bold!==false, ind=b.indent||0;
@@ -4414,6 +4840,28 @@ function pintarCupon(bloques, fBase){
     c.drawImage(logoListo,(W-w)/2,y,w,h); y+=h+Math.round(f*0.3);
   }
   lineas.forEach(l=>{
+    if(l.t==='sellos'){
+      const paso=maxW/l.cols, r=l.d/2, gros=Math.max(3,Math.round(f*0.1));
+      for(let i=0;i<l.total;i++){
+        const cx=pad+paso*(i%l.cols)+paso/2, cy=y+Math.floor(i/l.cols)*l.hFila+r+2;
+        const hito=(l.hitos||[]).find(h=>h.en===i+1);
+        const lleno=i<l.llenos, regalo=(i===0&&l.cortesia), premio=(i===l.total-1);
+        c.beginPath(); c.arc(cx,cy,r-gros/2,0,Math.PI*2); c.lineWidth=gros;
+        if(lleno||regalo){ c.fillStyle='#000'; c.fill(); }
+        else { c.setLineDash((premio||hito)?[]:[gros*1.6,gros*1.3]); c.strokeStyle='#000'; c.stroke(); c.setLineDash([]); }
+        c.textAlign='center'; c.textBaseline='middle';
+        c.fillStyle=(lleno||regalo)?'#fff':'#000';
+        if(regalo){ c.font=fnt(l.d*0.62,true); c.fillText('★',cx,cy+l.d*0.03); }
+        else if(lleno){ c.font=fnt(l.d*0.55,true); c.fillText('✓',cx,cy+l.d*0.02); }
+        else if(premio){ c.font=fnt(l.d*0.2,true); c.fillText('PREMIO',cx,cy); }
+        else if(hito){ c.font=fnt(l.d*0.19,true); c.fillText('REGALO',cx,cy); }
+        else { c.font=fnt(l.d*0.4,false); c.fillText(String(i+1),cx,cy); }
+        c.fillStyle='#000'; c.textBaseline='top';
+        const et = regalo ? 'regalo' : (premio ? (lleno?'¡listo!':l.etFinal||'') : (hito ? (lleno?'¡listo!':hito.et) : ''));
+        if(et){ c.font=fnt(f*0.65,true); c.fillText(et,cx,cy+r+Math.round(f*0.12)); }
+      }
+      c.textAlign='left'; y+=l.h; return;
+    }
     if(l.t==='hr'){ c.fillRect(pad,y+Math.floor(l.h/2)-2,maxW,Math.max(2,Math.round(f*0.09))); y+=l.h; return; }
     if(l.t==='gap'){ y+=l.h; return; }
     c.font=fnt(l.size,l.bold);
@@ -4503,6 +4951,14 @@ function bloquesBoleta(p){
     b.push({t:'row',l:`PROPINA SUGERIDA ${pct}%`,r:CLP(prop),size:f*0.9});
     b.push({t:'row',l:'TOTAL CON PROPINA',r:CLP(p.total+prop),size:f*1.1});
   }
+  if(p.pasaporte && p.pasaporte.tel && !p.pasaporte.porApp && p.estado!=='anulado' && !debeCupon(p)){
+    const F=cfgFidel(), sa=p.pasaporte.saldo||0;
+    b.push({t:'hr'});
+    b.push({t:'txt',s:'PASAPORTE '+loc.nombre.toUpperCase(),align:'center',size:f*0.95});
+    if(p.pasaporte.sellos) b.push({t:'txt',s:`Sumaste ${p.pasaporte.sellos} sello${p.pasaporte.sellos>1?'s':''}`,align:'center',size:f*0.85});
+    if(p.pasaporte.canjes) b.push({t:'txt',s:'Canjeaste tu premio. ¡Buen provecho!',align:'center',size:f*0.85});
+    frasesPasaporte(cli()[p.pasaporte.tel]).forEach(t=> b.push({t:'txt',s:t,align:'center',size:f*0.85}));
+  }
   b.push({t:'hr'});
   if(S.impresora.pie) b.push({t:'txt',s:S.impresora.pie,align:'center',size:f*0.85});
   if(S.impresora.frases!==false){
@@ -4517,6 +4973,17 @@ function htmlCupon(bloques, tipo){
   const pt = tipo==='comanda' ? base : Math.max(6, Math.round(base*(fuenteDe('boleta')/(S.impresora.fuentePx||36))));
   const esc=t=>String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;');
   const filas=bloques.map(b=>{
+    if(b.t==='sellos'){
+      const marcas=Array.from({length:b.total},(_,i)=>{
+        const h=(b.hitos||[]).find(h=>h.en===i+1);
+        if(i===0&&b.cortesia) return '★';
+        if(i<b.llenos) return '●';
+        if(i===b.total-1) return '🎁';
+        if(h) return '🍟';
+        return '○';
+      });
+      return `<div style="text-align:center;font-size:1.7em;letter-spacing:.18em;line-height:1.35;margin:.2em 0">${marcas.slice(0,4).join(' ')}<br>${marcas.slice(4).join(' ')}</div>`;
+    }
     if(b.t==='hr') return `<div style="border-top:2px dashed #000;margin:.45em 0"></div>`;
     if(b.t==='gap') return `<div style="height:.4em"></div>`;
     const rel=((b.size||36)/(tipo==='comanda'?fuenteDe('comanda'):fuenteDe('boleta'))).toFixed(2);
@@ -4552,23 +5019,153 @@ function bloquesTransferencia(local, p){
   b.push({t:'txt',s:'Envía el comprobante al correo o por WhatsApp',align:'center',size:f*0.8});
   return b;
 }
-async function imprimir(p, tipo='boleta', forzarLocal=false){
-  // Si hay un equipo principal y este no lo es, se manda para allá
-  if(!forzarLocal && !esImpresoraPrincipal() && S.impresoraRemota && db && nubeLista && p && p.id){
-    const ok=await encolarImpresion(p, tipo);
-    if(ok){ toast('Enviado a la impresora principal'); return; }
-    toast('No se pudo enviar: se imprime aquí');
+/* ---------- Cupón del pasaporte ---------- */
+function debeCupon(p){
+  if(!p || !p.pasaporte || !p.pasaporte.tel || p.pasaporte.porApp || p.estado==='anulado') return false;
+  const F=cfgFidel();
+  return F.cupon==='siempre' || (F.cupon==='nuevos' && !!p.pasaporte.nuevo);
+}
+function bloquesPasaporte(tel, local, p){
+  const F=cfgFidel(), loc=S.locales[local||S.local]||L(), f=fuenteDe('boleta'), b=[];
+  const c=cli()[tel]||{tel,nombre:'',movs:[]};
+  const s=sellosDe(c), llenos=Math.min(s,F.meta), cortesia=tieneCortesia(c);
+  b.push({t:'txt',s:'PASAPORTE',align:'center',size:f*1.5});
+  b.push({t:'txt',s:loc.nombre.toUpperCase(),align:'center',size:f*0.9});
+  b.push({t:'hr'});
+  if(c.nombre) b.push({t:'txt',s:c.nombre,align:'center',size:f*1.15});
+  b.push({t:'txt',s:fonoBonito(tel),align:'center',size:f*0.85,bold:false});
+  b.push({t:'gap'});
+  b.push({t:'sellos',total:F.meta,llenos,cortesia,
+    hitos:hitosF().map(h=>({en:h.en, et:cortoDe(hitoDe(tel,h.en,cicloDe(c)).n)})), etFinal:cortoDe(F.premio)});
+  frasesPasaporte(c).forEach((t,i)=> b.push({t:'txt',s:t,align:'center',size:f*(t.startsWith('¡')||t.startsWith('Llevas')?1.15:0.85)}));
+  if(p && p.pasaporte && p.pasaporte.tel===tel){
+    const pa=p.pasaporte, hoyTxt=[];
+    if(pa.regalo) hoyTxt.push('1 de regalo por ser nuevo');
+    if(pa.sellos) hoyTxt.push(`${pa.sellos} por tu compra`);
+    if(hoyTxt.length) b.push({t:'txt',s:'Hoy sumaste '+hoyTxt.join(' y '),align:'center',size:f*0.85});
+    if(pa.canjes) b.push({t:'txt',s:'Hoy canjeaste tu premio. ¡Buen provecho!',align:'center',size:f*0.85});
   }
+  b.push({t:'hr'});
+  reglaPremios().forEach(t=> b.push({t:'txt',s:t,align:'center',size:f*0.85}));
+  if(cortesia) b.push({t:'txt',s:'★ El primer sello va por la casa',align:'center',size:f*0.85});
+  b.push({t:'txt',s:F.modo==='shawarma'?'Cada shawarma suma 1 sello':'Cada compra suma 1 sello',align:'center',size:f*0.85});
+  if(F.dobles.length){
+    const dias=DIAS_SEM.filter(([k])=>F.dobles.includes(k)).map(([,t])=>t.toLowerCase());
+    b.push({t:'txt',s:'Sello doble los '+dias.join(', ').replace(/, ([^,]*)$/,' y $1'),align:'center',size:f*0.85});
+  }
+  b.push({t:'txt',s:'Tu pasaporte queda guardado en tu número de teléfono. Válido comprando en el local, para llevar o delivery directo; no aplica en apps.',align:'center',size:f*0.72,bold:false});
+  const link=enlacePasaporte(tel);
+  if(link){ b.push({t:'gap'}); b.push({t:'txt',s:'Míralo desde tu celular:',align:'center',size:f*0.78}); b.push({t:'txt',s:link.replace(/^https?:\/\//,''),align:'center',size:f*0.7,bold:false}); }
+  return b;
+}
+/* ---------- Tarjeta descargable (imagen, no ticket de rollo) ---------- */
+function envolverCentro(ctx,txt,maxW){
+  const out=[]; let linea='';
+  String(txt||'').split(/\s+/).filter(Boolean).forEach(w=>{
+    const t=linea?linea+' '+w:w;
+    if(ctx.measureText(t).width<=maxW) linea=t;
+    else { if(linea) out.push(linea); linea=w; }
+  });
+  if(linea) out.push(linea);
+  return out.length?out:[''];
+}
+function datosTarjeta(tel){
+  const F=cfgFidel(), loc=S.locales[S.local]||L(), c=cli()[tel]||{tel,nombre:'',movs:[]};
+  const s=sellosDe(c), llenos=Math.min(s,F.meta), cortesia=tieneCortesia(c);
+  const ciclo=cicloDe(c);
+  const hitos=hitosF().map(h=>({en:h.en, et:cortoDe(hitoDe(tel,h.en,ciclo).n)}));
+  const listos=premiosListos(c);
+  const prox=proximoPremio(c);
+  const estado = listos.length ? '¡Tienes listo: '+listos.map(x=>x.texto).join(' + ')+'!'
+    : `Te falta${prox.falta>1?'n':''} ${prox.falta} para ${prox.texto.toLowerCase()} gratis`;
+  return {negocio:loc.nombre, nombre:c.nombre||'', tel:fonoBonito(tel), meta:F.meta, llenos, cortesia, hitos,
+    etFinal:cortoDe(F.premio), estado, sub:`${llenos} de ${F.meta} sellos`,
+    reglas:[F.modo==='shawarma'?'Cada shawarma suma 1 sello':'Cada compra suma 1 sello',
+      ...(cortesia?['★ El primer sello va por la casa']:[]),
+      'Válido en el local, para llevar y delivery directo. No aplica en apps.']};
+}
+function dibujarTarjetaPNG(o, logoImg){
+  const W=1080, padX=90;
+  const med=document.createElement('canvas').getContext('2d');
+  const F1='800 42px Arial', F2='600 30px Arial';
+  med.font=F1; const lineasEstado=envolverCentro(med,o.estado,W-padX*2);
+  med.font=F2; const lineasReglas=o.reglas.flatMap(r=>envolverCentro(med,r,W-padX*2-40));
+  const logoH = logoImg ? Math.round(140*logoImg.height/logoImg.width) : 0;
+  const bandH = 60+logoH+44+32+40;               // logo + nombre del negocio, con aire
+  const cols=Math.min(5,o.meta), filas=Math.ceil(o.meta/cols);
+  const cellW=(W-padX*2)/cols, r=Math.min(cellW*0.38, 90);
+  const topeBanda=bandH;
+  const gridY0 = topeBanda+230, gridH = filas*(r*2+66);
+  const estadoY0 = gridY0+gridH+30, estadoH = lineasEstado.length*54+50;
+  const reglasY0 = estadoY0+estadoH, reglasH = lineasReglas.length*40+50;
+  const H = Math.round(reglasY0+reglasH+60);
+  const cv=document.createElement('canvas'); cv.width=W; cv.height=H;
+  const c=cv.getContext('2d');
+  c.fillStyle='#FBF7F0'; c.fillRect(0,0,W,H);
+  c.fillStyle='#1E1B18'; c.fillRect(0,0,W,bandH);
+  let y=60;
+  if(logoImg){ c.drawImage(logoImg,(W-140)/2,y,140,logoH); y+=logoH+18; }
+  c.fillStyle='#fff'; c.textAlign='center';
+  c.font='800 36px Arial'; c.fillText(String(o.negocio||'').toUpperCase(), W/2, y+32);
+  c.fillStyle='#1E1B18';
+  c.font='800 58px Arial'; c.fillText('PASAPORTE', W/2, topeBanda+80);
+  c.font='700 40px Arial'; c.fillText(o.nombre||'Cliente nuevo', W/2, topeBanda+140);
+  c.fillStyle='#8A8578'; c.font=F2; c.fillText(o.tel, W/2, topeBanda+182);
+  for(let i=0;i<o.meta;i++){
+    const col=i%cols, fila=Math.floor(i/cols);
+    const cx=padX+cellW*col+cellW/2, cy=gridY0+fila*(r*2+66)+r;
+    const hito=o.hitos.find(h=>h.en===i+1);
+    const lleno=i<o.llenos, cortesia=(i===0&&o.cortesia), final=(i===o.meta-1);
+    c.beginPath(); c.arc(cx,cy,r,0,Math.PI*2); c.lineWidth=6;
+    if(lleno||cortesia){ c.fillStyle='#D9622B'; c.fill(); }
+    else { c.setLineDash((final||hito)?[]:[9,8]); c.strokeStyle='#C3C6BB'; c.stroke(); c.setLineDash([]); }
+    c.fillStyle=(lleno||cortesia)?'#fff':'#1E1B18'; c.textAlign='center'; c.textBaseline='middle';
+    if(cortesia){ c.font='700 '+Math.round(r*0.9)+'px Arial'; c.fillText('★',cx,cy+4); }
+    else if(lleno){ c.font='700 '+Math.round(r*0.8)+'px Arial'; c.fillText('✓',cx,cy+2); }
+    else if(final){ c.font='800 '+Math.round(r*0.32)+'px Arial'; c.fillText('PREMIO',cx,cy); }
+    else if(hito){ c.font='800 '+Math.round(r*0.28)+'px Arial'; c.fillText('REGALO',cx,cy); }
+    else { c.font='600 '+Math.round(r*0.6)+'px Arial'; c.fillText(String(i+1),cx,cy); }
+    c.textBaseline='alphabetic';
+    const et = cortesia?'regalo':(final?(lleno?'¡listo!':o.etFinal):(hito?(lleno?'¡listo!':hito.et):''));
+    if(et){ c.fillStyle='#8A8578'; c.font='700 22px Arial'; c.fillText(et,cx,cy+r+32); }
+  }
+  c.textAlign='center';
+  c.fillStyle='#1E1B18'; c.font=F1;
+  let yy=estadoY0+40;
+  lineasEstado.forEach(l=>{ c.fillText(l,W/2,yy); yy+=54; });
+  c.strokeStyle='#E7E1D3'; c.lineWidth=2; c.beginPath();
+  c.moveTo(padX,reglasY0-10); c.lineTo(W-padX,reglasY0-10); c.stroke();
+  c.fillStyle='#8A8578'; c.font=F2; yy=reglasY0+30;
+  lineasReglas.forEach(l=>{ c.fillText(l,W/2,yy); yy+=40; });
+  return cv.toDataURL('image/png');
+}
+async function descargarTarjeta(tel){
+  const c=cli()[tel]; if(!c) return toast('Ese cliente no está registrado');
+  const src=(S.locales[S.local]||{}).logoBN;
+  const logo = src ? await cargarImg(src) : null;
+  const img=dibujarTarjetaPNG(datosTarjeta(tel), logo);
+  const a=document.createElement('a'); a.href=img; a.download=`pasaporte-${tel}.png`; a.click();
+  toast('Tarjeta descargada');
+}
+
+function imprimirPasaporte(tel, local){
+  if(!cli()[tel]) return toast('Ese cliente no está registrado');
+  imprimir({local:local||S.local, num:0, pasaporte:{tel}}, 'pasaporte');
+}
+
+async function imprimir(p, tipo='boleta'){
   const im=S.impresora;
   const src=S.locales[p.local||S.local]?.logoBN;
   logoListo = (src && im.logo!==false) ? await cargarImg(src) : null;
   estiloImpresion();
   const lista = tipo==='ambas' ? ['comanda','boleta'] : [tipo];
+  if(lista.includes('boleta') && debeCupon(p)) lista.push('pasaporte');
   let html='';
   lista.forEach(t=>{
-    const copias = t==='comanda' ? (im.copiasComanda||1) : (t==='transferencia' ? 1 : (im.copiasBoleta||1));
+    const copias = t==='comanda' ? (im.copiasComanda||1) : ((t==='transferencia'||t==='pasaporte') ? 1 : (im.copiasBoleta||1));
     const bl = t==='comanda' ? bloquesComanda(p)
              : t==='transferencia' ? bloquesTransferencia(p.local||S.local, p)
+             : t==='pasaporte' ? bloquesPasaporte(p.pasaporte.tel, p.local||S.local, p)
              : bloquesBoleta(p);
     const cuerpo = im.modo==='texto' ? htmlCupon(bl,t) : `<img src="${pintarCupon(bl, fuenteDe(t))}">`;
     for(let i=0;i<copias;i++) html += `<div class="cupon">${cuerpo}</div>`;
@@ -4597,12 +5194,16 @@ function pedirImpresion(p){
       <button style="width:100%;border-radius:10px;padding:14px" data-t="boleta">🧾 Voucher del cliente</button>
       <button style="width:100%;border-radius:10px;padding:14px" data-t="ambas">📑 Los dos</button>
       <button style="width:100%;border-radius:10px;padding:14px" data-t="transferencia">🏦 Datos de transferencia</button>
+      ${p.pasaporte&&p.pasaporte.tel?`<button style="width:100%;border-radius:10px;padding:14px" data-pas="1">🎟️ Pasaporte del cliente</button>`:''}
+      ${p.pasaporte&&p.pasaporte.tel?`<button style="width:100%;border-radius:10px;padding:14px" data-pasimg="1">⬇️ Descargar tarjeta del cliente</button>`:''}
       <button style="width:100%;border-radius:10px;padding:14px" data-d="comanda">⬇️ Descargar comanda como imagen</button>
       <button style="width:100%;border-radius:10px;padding:14px" data-d="boleta">⬇️ Descargar voucher como imagen</button>
     </div>
     <div class="modal-acc"><button class="btn" id="mCancel">Cancelar</button></div>`;
   $('#modalBox').querySelectorAll('[data-t]').forEach(b=> b.onclick=()=>{ const t=b.dataset.t; cerrarModal(); imprimir(p,t); });
   $('#modalBox').querySelectorAll('[data-d]').forEach(b=> b.onclick=()=>{ descargarTicket(p,b.dataset.d); });
+  $('#modalBox').querySelectorAll('[data-pas]').forEach(b=> b.onclick=()=>{ cerrarModal(); imprimirPasaporte(p.pasaporte.tel, p.local); });
+  $('#modalBox').querySelectorAll('[data-pasimg]').forEach(b=> b.onclick=()=>{ cerrarModal(); descargarTarjeta(p.pasaporte.tel); });
   $('#mCancel').onclick = cerrarModal;
   $('#modal').classList.add('on');
 }
@@ -4685,7 +5286,7 @@ function ir(v){
   if(v!=='caja'){ const cm=$$('#contadorMes'); if(cm) cm.classList.remove('on'); }
   if(v==='caja') contadorOculto=false;
   if(v==='cocina')renderCocina(); if(v==='caja')renderCaja();
-  if(v==='cuadre')renderCuadre(); if(v==='menu')renderMenuAdmin();
+  if(v==='cuadre')renderCuadre(); if(v==='menu')renderMenuAdmin(); if(v==='clientes')renderClientes();
   window.scrollTo(0,0);
 }
 function refrescarPedido(){ renderCabecera(); renderCats(); renderMenu(); renderTicket(); }
@@ -4748,7 +5349,7 @@ function pintarLocales(){
   }, 3000);
   $('#btnSon').onclick=()=>{sonido=!sonido;$('#btnSon').classList.toggle('on',sonido);toast(sonido?'Aviso sonoro activado':'Aviso sonoro en silencio');};
   $('#btnNube').style.display = 'block';
-  arrancarWeb(); iniciarNube();
+  arrancarWeb(); iniciarNube(); aplicarBienvenidas();
   setInterval(()=>{if($('#v-cocina').classList.contains('on'))renderCocina();},20000);
   document.addEventListener('keydown',e=>{if(e.key==='Escape')cerrarModal();});
 })();
