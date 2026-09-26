@@ -630,7 +630,7 @@ let S = estadoInicial(), draft=null, catFiltro='Todo', sonido=true, busqueda='';
 let admin=false; // se pierde al cerrar la app: hay que volver a poner el PIN
 
 /* ================= persistencia ================= */
-const VERSION='89 · 23-09-2026';
+const VERSION='90 · 23-09-2026';
 const CLAVE='comandera:estado';
 let tGuardar=null, ultimoGuardado=null, fallosGuardado=0;
 // Se escribe SIEMPRE en los dos lados y al leer gana el más reciente:
@@ -869,7 +869,10 @@ async function cargar(){
 let db=null, nubeLista=false, desuscribir=null, aplicandoNube=false;
 let subidos={}, subidosCli={}, ultimaNube=null, errorNube='', configTs=0;
 
-function cfgNube(){ if(!S.nube) S.nube={apiKey:'',proyecto:'',tienda:'',activo:false}; return S.nube; }
+// Datos fijos de tu proyecto de Firebase: así cualquier dispositivo que abra esta
+// página (celular, PC nuevo, etc.) queda conectado solo, sin pasar por el asistente.
+const NUBE_FIJA={apiKey:'AIzaSyCYSxJo2QdG4ifGXBH4RQf3r9vFxFeVhyA', proyecto:'comanderia-888ef', tienda:'comanderialiali', activo:true};
+function cfgNube(){ if(!S.nube) S.nube={...NUBE_FIJA}; return S.nube; }
 function estadoNube(){
   const n=cfgNube();
   if(!n.activo) return 'Desactivada';
