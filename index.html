@@ -630,7 +630,7 @@ let S = estadoInicial(), draft=null, catFiltro='Todo', sonido=true, busqueda='';
 let admin=false; // se pierde al cerrar la app: hay que volver a poner el PIN
 
 /* ================= persistencia ================= */
-const VERSION='90 · 23-09-2026';
+const VERSION='91 · 23-09-2026';
 const CLAVE='comandera:estado';
 let tGuardar=null, ultimoGuardado=null, fallosGuardado=0;
 // Se escribe SIEMPRE en los dos lados y al leer gana el más reciente:
@@ -915,6 +915,9 @@ async function iniciarNube(){
   }
 }
 const refTienda = ()=> db.collection('comanderas').doc(cfgNube().tienda);
+// Si hay un campo con foco dentro de esa vista, el usuario está escribiendo ahí mismo:
+// no la redibujamos encima o le borramos lo que lleva tecleado.
+const escribiendoEn = sel => { const a=document.activeElement; return !!(a && a.closest && a.closest(sel)); };
 
 function escucharNube(){
   const desde=new Date(Date.now()-1000*60*60*24*45).toISOString().slice(0,10); // 45 días
@@ -937,9 +940,9 @@ function escucharNube(){
           if(mx>(S.locales[k].num||0)) S.locales[k].num=mx;
         });
         guardar();
-        if($('#v-cocina').classList.contains('on')) renderCocina();
-        if($('#v-caja').classList.contains('on')) renderCaja();
-        if($('#v-cuadre').classList.contains('on')) renderCuadre();
+        if($('#v-cocina').classList.contains('on') && !escribiendoEn('#v-cocina')) renderCocina();
+        if($('#v-caja').classList.contains('on') && !escribiendoEn('#v-caja')) renderCaja();
+        if($('#v-cuadre').classList.contains('on') && !escribiendoEn('#v-cuadre')) renderCuadre();
         pintarBadge();
         if(nuevos && !snap.metadata.hasPendingWrites) beep();
       }
@@ -961,7 +964,7 @@ function escucharNube(){
       aplicandoNube=false;
       guardar();
       const act=document.querySelector('nav.tabs button.on');
-      if(act) ir(act.dataset.v);
+      if(act && !escribiendoEn('#v-'+act.dataset.v)) ir(act.dataset.v);
     }, err=>{ errorNube=err.code||String(err); });
 
   const unCli = refTienda().collection('clientes')
@@ -977,7 +980,7 @@ function escucharNube(){
       aplicandoNube=false; ultimaNube=Date.now();
       if(cambios){
         guardar();
-        if($('#v-clientes').classList.contains('on') && !($$('#modal')||{}).classList?.contains('on')) renderClientes();
+        if($('#v-clientes').classList.contains('on') && !($$('#modal')||{}).classList?.contains('on') && !escribiendoEn('#v-clientes')) renderClientes();
         pintarPasaporte();
       }
     }, err=>{ errorNube=err.code||String(err); });
