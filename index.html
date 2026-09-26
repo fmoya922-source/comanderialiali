@@ -630,7 +630,7 @@ let S = estadoInicial(), draft=null, catFiltro='Todo', sonido=true, busqueda='';
 let admin=false; // se pierde al cerrar la app: hay que volver a poner el PIN
 
 /* ================= persistencia ================= */
-const VERSION='91 · 23-09-2026';
+const VERSION='92 · 23-09-2026';
 const CLAVE='comandera:estado';
 let tGuardar=null, ultimoGuardado=null, fallosGuardado=0;
 // Se escribe SIEMPRE en los dos lados y al leer gana el más reciente:
@@ -918,6 +918,9 @@ const refTienda = ()=> db.collection('comanderas').doc(cfgNube().tienda);
 // Si hay un campo con foco dentro de esa vista, el usuario está escribiendo ahí mismo:
 // no la redibujamos encima o le borramos lo que lleva tecleado.
 const escribiendoEn = sel => { const a=document.activeElement; return !!(a && a.closest && a.closest(sel)); };
+function refrescoSuave(campo, fn){
+  setTimeout(()=>{ if(document.activeElement!==campo) fn(); }, 0);
+}
 
 function escucharNube(){
   const desde=new Date(Date.now()-1000*60*60*24*45).toISOString().slice(0,10); // 45 días
@@ -3991,7 +3994,7 @@ function renderCuadre(){
     </div>`;
 
   const g=(id,fn)=>{ const el=$$('#'+id); if(el) el.onchange=fn; };
-  g('c-contado',e=>{ c.efectivoContado = e.target.value===''?null:Number(e.target.value)||0; guardar(); renderCuadre(); });
+  g('c-contado',e=>{ c.efectivoContado = e.target.value===''?null:Number(e.target.value)||0; guardar(); refrescoSuave(e.target,renderCuadre); });
   g('c-fondo',async e=>{
     const v=Number(e.target.value)||0, antes=num(c.fondo);
     if(v<antes){
@@ -3999,7 +4002,7 @@ function renderCuadre(){
       if(!ok){ renderCuadre(); return; }
     }
     anotar('Fondo de caja', CLP(antes)+' → '+CLP(v), antes-v);
-    c.fondo=v; guardarYa(); renderCuadre();
+    c.fondo=v; guardarYa(); refrescoSuave(e.target,renderCuadre);
   });
   const elp=$$('#c-proppag');
   if(elp) elp.onchange=()=>{
@@ -4008,7 +4011,7 @@ function renderCuadre(){
     if(v>propinaSis) toast('Las propinas del día son '+CLP(propinaSis));
     c.propinaPagada=Math.min(v, Math.max(0,disponibleTotal), propinaSis);
     anotar('Propinas pagadas', CLP(c.propinaPagada), c.propinaPagada);
-    guardarYa(); renderCuadre();
+    guardarYa(); refrescoSuave(elp,renderCuadre);
   };
   if($$('#c-propTodo')) $('#c-propTodo').onclick=()=>{
     c.propinaPagada=Math.min(propinaSis, Math.max(0,disponibleTotal));
@@ -4017,13 +4020,13 @@ function renderCuadre(){
   };
   if($$('#c-propNada')) $('#c-propNada').onclick=()=>{ c.propinaPagada=0; guardarYa(); renderCuadre(); };
   $('#v-cuadre').querySelectorAll('[data-app]').forEach(inp=> inp.onchange=()=>{
-    c.apps[inp.dataset.app]=Number(inp.value)||0; guardar(); renderCuadre();
+    c.apps[inp.dataset.app]=Number(inp.value)||0; guardar(); refrescoSuave(inp,renderCuadre);
   });
   g('c-nota',e=>{ c.nota=e.target.value; guardar(); });
   $('#v-cuadre').querySelectorAll('.m-row[data-gasto]').forEach(row=>{
     const gg=c.gastos[+row.dataset.gasto];
     row.querySelector('.g-n').onchange=e=>{gg.n=e.target.value;guardar();};
-    row.querySelector('.g-m').onchange=e=>{gg.m=Number(e.target.value)||0;guardar();renderCuadre();};
+    row.querySelector('.g-m').onchange=e=>{gg.m=Number(e.target.value)||0;guardar();refrescoSuave(e.target,renderCuadre);};
     row.querySelector('.gdel').onclick=async()=>{
       const ok=await pedirPin('Vas a borrar el gasto "'+(gg.n||'')+'" de '+CLP(gg.m)+'.');
       if(!ok) return;
