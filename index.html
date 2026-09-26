@@ -630,7 +630,7 @@ let S = estadoInicial(), draft=null, catFiltro='Todo', sonido=true, busqueda='';
 let admin=false; // se pierde al cerrar la app: hay que volver a poner el PIN
 
 /* ================= persistencia ================= */
-const VERSION='92 · 23-09-2026';
+const VERSION='93 · 23-09-2026';
 const CLAVE='comandera:estado';
 let tGuardar=null, ultimoGuardado=null, fallosGuardado=0;
 // Se escribe SIEMPRE en los dos lados y al leer gana el más reciente:
@@ -867,7 +867,7 @@ async function cargar(){
    Firestore guarda en el equipo, así que sigue funcionando sin internet
    y sube todo solo cuando vuelve la señal. */
 let db=null, nubeLista=false, desuscribir=null, aplicandoNube=false;
-let subidos={}, subidosCli={}, ultimaNube=null, errorNube='', configTs=0;
+let subidos={}, subidosCli={}, subidosCua={}, ultimaNube=null, errorNube='', configTs=0;
 
 // Datos fijos de tu proyecto de Firebase: así cualquier dispositivo que abra esta
 // página (celular, PC nuevo, etc.) queda conectado solo, sin pasar por el asistente.
@@ -959,7 +959,6 @@ function escucharNube(){
       configTs=d.ts||0;
       aplicandoNube=true;
       if(d.locales) S.locales=JSON.parse(d.locales);
-      if(d.cuadres) S.cuadres=JSON.parse(d.cuadres);
       if(d.impresora) S.impresora=Object.assign(S.impresora,JSON.parse(d.impresora));
       if(d.codigos) S.codigos=JSON.parse(d.codigos);
       if(d.pagos) S.pagos=JSON.parse(d.pagos);
@@ -988,7 +987,38 @@ function escucharNube(){
       }
     }, err=>{ errorNube=err.code||String(err); });
 
-  desuscribir=()=>{ unPed(); unCfg(); unCli(); };
+  const unCua = refTienda().collection('cuadres')
+    .onSnapshot(snap=>{
+      aplicandoNube=true; let cambios=0;
+      snap.docChanges().forEach(ch=>{
+        if(ch.type==='removed') return;
+        const d=ch.doc.data(), clave=ch.doc.id;
+        if(clave===claveCuadre(fechaVista()) && escribiendoEn('#v-cuadre')) return; // lo está editando ahora
+        if(canon(S.cuadres[clave])===canon(d)) return;
+        S.cuadres[clave]=d; subidosCua[clave]=canon(d); cambios++;
+      });
+      aplicandoNube=false; ultimaNube=Date.now();
+      if(cambios){
+        guardar();
+        if($('#v-cuadre').classList.contains('on') && !escribiendoEn('#v-cuadre')) renderCuadre();
+      }
+    }, err=>{ errorNube=err.code||String(err); });
+
+  desuscribir=()=>{ unPed(); unCfg(); unCli(); unCua(); };
+}
+// Sube SOLO el cuadre que se está mirando ahora, apenas cambia (sin esperar el ciclo general)
+let tCuaNube=null;
+function subirCuadreNube(clave){
+  if(!db || !nubeLista) return;
+  clearTimeout(tCuaNube);
+  tCuaNube=setTimeout(async()=>{
+    try{
+      const cu=S.cuadres[clave]; if(!cu) return;
+      const j=canon(cu); if(subidosCua[clave]===j) return;
+      await refTienda().collection('cuadres').doc(clave).set(JSON.parse(j));
+      subidosCua[clave]=j; ultimaNube=Date.now();
+    }catch(e){ errorNube=e.code||String(e.message||e); }
+  }, 350);
 }
 
 // Sube lo que cambió. Se llama después de cada guardado local.
@@ -1016,6 +1046,14 @@ async function subirNube(){
       if(subidosCli[c.tel]===j) return;
       lote.set(colCli.doc(c.tel), JSON.parse(j)); subidosCli[c.tel]=j; n++;
     });
+    // Cuadres (caja del día): un documento por fecha+local, para que dos equipos nunca se pisen entre sí
+    const colCua=refTienda().collection('cuadres');
+    Object.entries(S.cuadres||{}).forEach(([clave,cu])=>{
+      if(!cu || n>=450) return;
+      const j=canon(cu);
+      if(subidosCua[clave]===j) return;
+      lote.set(colCua.doc(clave), JSON.parse(j)); subidosCua[clave]=j; n++;
+    });
     if(n){ await lote.commit(); ultimaNube=Date.now(); }
   }catch(e){ errorNube=e.code||String(e.message||e); }
 }
@@ -1027,7 +1065,7 @@ function subirConfigNube(){
     try{
       configTs=Date.now();
       await refTienda().collection('config').doc('general').set({
-        ts:configTs, locales:JSON.stringify(S.locales), cuadres:JSON.stringify(S.cuadres||{}),
+        ts:configTs, locales:JSON.stringify(S.locales),
         impresora:JSON.stringify(S.impresora), codigos:JSON.stringify(S.codigos), pagos:JSON.stringify(S.pagos),
         fidel:JSON.stringify(cfgFidel())
       });
@@ -3994,7 +4032,7 @@ function renderCuadre(){
     </div>`;
 
   const g=(id,fn)=>{ const el=$$('#'+id); if(el) el.onchange=fn; };
-  g('c-contado',e=>{ c.efectivoContado = e.target.value===''?null:Number(e.target.value)||0; guardar(); refrescoSuave(e.target,renderCuadre); });
+  g('c-contado',e=>{ c.efectivoContado = e.target.value===''?null:Number(e.target.value)||0; guardar(); subirCuadreNube(claveCuadre(f)); refrescoSuave(e.target,renderCuadre); });
   g('c-fondo',async e=>{
     const v=Number(e.target.value)||0, antes=num(c.fondo);
     if(v<antes){
@@ -4002,7 +4040,7 @@ function renderCuadre(){
       if(!ok){ renderCuadre(); return; }
     }
     anotar('Fondo de caja', CLP(antes)+' → '+CLP(v), antes-v);
-    c.fondo=v; guardarYa(); refrescoSuave(e.target,renderCuadre);
+    c.fondo=v; guardarYa(); subirCuadreNube(claveCuadre(f)); refrescoSuave(e.target,renderCuadre);
   });
   const elp=$$('#c-proppag');
   if(elp) elp.onchange=()=>{
@@ -4011,27 +4049,27 @@ function renderCuadre(){
     if(v>propinaSis) toast('Las propinas del día son '+CLP(propinaSis));
     c.propinaPagada=Math.min(v, Math.max(0,disponibleTotal), propinaSis);
     anotar('Propinas pagadas', CLP(c.propinaPagada), c.propinaPagada);
-    guardarYa(); refrescoSuave(elp,renderCuadre);
+    guardarYa(); subirCuadreNube(claveCuadre(f)); refrescoSuave(elp,renderCuadre);
   };
   if($$('#c-propTodo')) $('#c-propTodo').onclick=()=>{
     c.propinaPagada=Math.min(propinaSis, Math.max(0,disponibleTotal));
     anotar('Propinas pagadas', CLP(c.propinaPagada), c.propinaPagada);
-    guardarYa(); renderCuadre();
+    guardarYa(); subirCuadreNube(claveCuadre(f)); renderCuadre();
   };
-  if($$('#c-propNada')) $('#c-propNada').onclick=()=>{ c.propinaPagada=0; guardarYa(); renderCuadre(); };
+  if($$('#c-propNada')) $('#c-propNada').onclick=()=>{ c.propinaPagada=0; guardarYa(); subirCuadreNube(claveCuadre(f)); renderCuadre(); };
   $('#v-cuadre').querySelectorAll('[data-app]').forEach(inp=> inp.onchange=()=>{
-    c.apps[inp.dataset.app]=Number(inp.value)||0; guardar(); refrescoSuave(inp,renderCuadre);
+    c.apps[inp.dataset.app]=Number(inp.value)||0; guardar(); subirCuadreNube(claveCuadre(f)); refrescoSuave(inp,renderCuadre);
   });
-  g('c-nota',e=>{ c.nota=e.target.value; guardar(); });
+  g('c-nota',e=>{ c.nota=e.target.value; guardar(); subirCuadreNube(claveCuadre(f)); });
   $('#v-cuadre').querySelectorAll('.m-row[data-gasto]').forEach(row=>{
     const gg=c.gastos[+row.dataset.gasto];
-    row.querySelector('.g-n').onchange=e=>{gg.n=e.target.value;guardar();};
-    row.querySelector('.g-m').onchange=e=>{gg.m=Number(e.target.value)||0;guardar();refrescoSuave(e.target,renderCuadre);};
+    row.querySelector('.g-n').onchange=e=>{gg.n=e.target.value;guardar();subirCuadreNube(claveCuadre(f));};
+    row.querySelector('.g-m').onchange=e=>{gg.m=Number(e.target.value)||0;guardar();subirCuadreNube(claveCuadre(f));refrescoSuave(e.target,renderCuadre);};
     row.querySelector('.gdel').onclick=async()=>{
       const ok=await pedirPin('Vas a borrar el gasto "'+(gg.n||'')+'" de '+CLP(gg.m)+'.');
       if(!ok) return;
       anotar('Gasto borrado', gg.n+' '+CLP(gg.m), -num(gg.m));
-      c.gastos.splice(+row.dataset.gasto,1); guardarYa(); renderCuadre();
+      c.gastos.splice(+row.dataset.gasto,1); guardarYa(); subirCuadreNube(claveCuadre(f)); renderCuadre();
     };
   });
   $('#g-go').onclick=async()=>{
@@ -4040,7 +4078,7 @@ function renderCuadre(){
     const ok=await pedirPin('Vas a descontar '+CLP(m)+' de la caja por "'+n+'".');
     if(!ok) return;
     c.gastos.push({n,m,ts:Date.now()}); anotar('Gasto de caja', n, m);
-    guardarYa(); renderCuadre();
+    guardarYa(); subirCuadreNube(claveCuadre(f)); renderCuadre();
   };
   $('#c-prev').onclick=()=>{ moverFecha(-1); renderCuadre(); };
   $('#c-next').onclick=()=>{ if(!esHoy){ moverFecha(1); renderCuadre(); } };
@@ -4082,7 +4120,7 @@ function renderCuadre(){
     const ok=await pedirPin('Vas a borrar el cuadre de este día.');
     if(!ok) return;
     anotar('Cuadre borrado', f, 0);
-    S.cuadres[claveCuadre(f)]=cuadreVacio(); guardarYa(); renderCuadre();
+    S.cuadres[claveCuadre(f)]=cuadreVacio(); guardarYa(); subirCuadreNube(claveCuadre(f)); renderCuadre();
   };
   $('#c-csv').onclick=()=>{
     const filas=[['CUADRE',fechaLarga(f),S.locales[S.local].nombre],[],
