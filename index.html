@@ -630,7 +630,7 @@ let S = estadoInicial(), draft=null, catFiltro='Todo', sonido=true, busqueda='';
 let admin=false; // se pierde al cerrar la app: hay que volver a poner el PIN
 
 /* ================= persistencia ================= */
-const VERSION='93 · 23-09-2026';
+const VERSION='95 · 23-09-2026';
 const CLAVE='comandera:estado';
 let tGuardar=null, ultimoGuardado=null, fallosGuardado=0;
 // Se escribe SIEMPRE en los dos lados y al leer gana el más reciente:
@@ -923,8 +923,8 @@ function refrescoSuave(campo, fn){
 }
 
 function escucharNube(){
-  const desde=new Date(Date.now()-1000*60*60*24*45).toISOString().slice(0,10); // 45 días
-  const unPed = refTienda().collection('pedidos').where('fecha','>=',desde)
+  // Sin límite de fecha: se sincroniza TODO el historial, no solo lo reciente.
+  const unPed = refTienda().collection('pedidos')
     .onSnapshot(snap=>{
       aplicandoNube=true; let cambios=0, nuevos=0;
       snap.docChanges().forEach(ch=>{
@@ -1027,9 +1027,9 @@ async function subirNube(){
   try{
     const col=refTienda().collection('pedidos');
     const vivos={};
-    const recientes=S.pedidos.filter(p=>p.fecha>=new Date(Date.now()-1000*60*60*24*45).toISOString().slice(0,10));
+    // Sin límite de fecha: con el tiempo esto sube TODO lo que haya en S.pedidos, no solo lo reciente.
     let lote=db.batch(), n=0;
-    recientes.forEach(p=>{
+    S.pedidos.forEach(p=>{
       vivos[p.id]=1;
       const j=JSON.stringify(p);
       if(subidos[p.id]===j) return;
@@ -4733,7 +4733,10 @@ function renderMenuAdmin(){
         const d=JSON.parse(fr.result);
         if(!d || !d.locales) return toast('Ese archivo no es un respaldo válido');
         if(!confirm('Esto reemplaza los datos actuales por los del respaldo. ¿Seguro?')) return;
-        S=Object.assign(estadoInicial(),d); await guardarYa();
+        const nubeActual=S.nube; // no dejar que un respaldo viejo apague la sincronización de este equipo
+        S=Object.assign(estadoInicial(),d);
+        if(nubeActual && nubeActual.activo) S.nube=nubeActual;
+        await guardarYa();
         pintarLocales(); refrescarPedido(); pintarBadge(); renderMenuAdmin(); toast('Respaldo restaurado');
       }catch(err){ toast('No se pudo leer el archivo'); }
     };
